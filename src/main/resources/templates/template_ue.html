@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="template_chefDepartement">
+<head>
+    <meta charset="UTF-8">
+    <title>page maquette</title>
+</head>
+<body>
+<div layout:fragment="custom-content">
+
+    <div class="container">
+        <h3 style="text-align: center">La liste des UE</h3>
+
+        <div class="row" style="padding-bottom: 10px; padding-top: 10px">
+            <div style="text-align: center">
+                <button type="button" class="btn btn-success" data-toggle="modal" data-target="#form_Ajouter_UE" >Ajouter UE</button>
+            </div>
+        </div>
+
+        <div data-dismiss="modal" style="margin-top:25px">
+            <div class="modal fade" id="form_Ajouter_UE">
+                <div class="modal-dialog" >
+                    <div class="modal-content panel-success" >
+                        <!--modal Header-->
+                        <div class="modal-header panel-heading" >
+                            <button type="button" class="close" data-dismiss="modal">x</button>
+                            <h4 class="modal-title" style="text-align: center">Ajouter un UE</h4>
+                        </div>
+                        <!--modal Body-->
+                        <form th:action="@{/ChefDepartement/AjouterUE}" method="post">
+                            <div class="modal-body" >
+                                <div class="form-group">
+
+                                    <label >Libelle</label>
+                                    <input type="text" class="form-control" name="libelle" />
+
+                                    <label >CODE</label>
+                                    <input type="text" class="form-control" name="code" />
+
+                                    <label >Coefficient</label>
+                                    <input type="number" class="form-control" name="coeff" />
+
+                                    <label >Credit</label>
+                                    <input type="number" class="form-control" name="credit"/>
+
+
+                                   <!--
+                                    <label >Description</label>
+                                    <input type="text" class="form-control" name="description" />
+                                   -->
+
+                                </div>
+
+                            </div>
+                            <!--modal Footer-->
+                            <div class="modal-footer" >
+                                <div class="row">
+                                    <div class="col-lg-3  col-md-3 col-sm-3 col-xs-4">
+                                        <button type="submit" class="btn btn-success">Ajouter</button>
+                                    </div>
+                                    <div class="col-lg-offset-5 col-lg-3 col-md-offset-5 col-md-3 col-sm-offset-5 col-sm-3 col-xs-8">
+                                        <button type="submit" class="btn btn-default " data-dismiss="modal">Annuler</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+        <div class="table-responsive">
+            <table class="table table-bordered table-striped" id="table_UE">
+                <thead>
+                <tr>
+                    <th colspan="2">
+                    Intitulé
+                   </th>
+                </tr>
+                <tr>
+                    <th>Code</th>
+                    <th>Libele</th>
+                    <th>Coefficient</th>
+                    <th>Credit</th>
+
+                    <th>Operations</th>
+                    <th>Detaails</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="ue:${listeUE}">
+                    <td th:text="${ue.code}"></td>
+                    <td th:text="${ue.libelle}"></td>
+                    <td th:text="${ue.coeff}"></td>
+                    <td th:text="${ue.credit}"></td>
+
+                    <!--
+                        Nom
+                        Prenom
+                        Adresse
+                        Telephone
+                    -->
+                    <td>
+                        <button class="btn btn-info btn-sm" data-title="Edit" data-toggle="modal" th:attr="data-target='#form_Modifier_UE'+${ue.id}" >
+                            Modifier
+                        </button>
+                        <button class="btn btn-danger btn-sm" data-title="Delete" data-toggle="modal" th:attr="data-target='#form_Supprimer_UE'+${ue.id}">
+                            Supprimer
+                        </button>
+                    </td>
+                    <td>
+                        <a class="btn btn-info btn-sm" th:href="@{/ChefDepartement/EC(id=${ue.id})}">
+                           voir details
+                        </a>
+                    </td>
+
+                     <!--Debut popup modifier un ue-->
+                    <div data-dismiss="modal">
+                        <div class="modal fade" th:attr="id='form_Modifier_UE'+${ue.id}" >
+                            <div class="modal-dialog" >
+                                <div class="modal-content panel-info" >
+
+                                    <div class="modal-header panel-heading" >
+                                        <button type="button" class="close" data-dismiss="modal">x</button>
+                                        <h4 class="modal-title" style="text-align: center">Modifier UE</h4>
+                                    </div>
+
+                                    <form th:action="@{/ChefDepartement/ModifierUE}" method="post">
+                                        <div class="modal-body" >
+                                            <div style="display: none">
+                                                <input name="id" th:value="${ue.id}" />
+                                            </div>
+                                            <div class="form-group">
+                                                <label >Code</label>
+                                                <input type="text" class="form-control" name="code" th:value="${ue.code}"/>
+
+                                                <label >Libelle</label>
+                                                <input type="text" class="form-control" name="libelle"  th:value="${ue.libelle}"/>
+
+                                                <label >Coefficient</label>
+                                                <input type="text" class="form-control" name="coeff" th:value="${ue.coeff}" />
+
+                                                <label >Credit</label>
+                                                <input type="text" class="form-control" name="credit"  th:value="${ue.credit}"/>
+
+                                            </div>
+
+                                        </div>
+
+                                        <div class="modal-footer" >
+                                            <div class="row">
+                                                <div class="col-lg-3  col-md-3 col-sm-3 col-xs-4">
+                                                    <button type="submit" class="btn btn-info" >Modifier</button>
+                                                </div>
+                                                <div class="col-lg-offset-5 col-lg-3 col-md-offset-5 col-md-3 col-sm-offset-5 col-sm-3 col-xs-8">
+                                                    <button type="button" class="btn btn-default " data-dismiss="modal">Annuler</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                     <!--Fin popup modifier un Etudiant -->
+
+                    <!-- Debut popup supprimer un Etudiant-->
+                    <div data-dismiss="modal">
+                        <div class="modal fade" th:attr="id='form_Supprimer_UE'+${ue.id}">
+                            <div class="modal-dialog" >
+                                <div class="modal-content panel-danger" >
+
+                                    <div class="modal-header panel-heading" >
+                                        <button type="button" class="close" data-dismiss="modal">x</button>
+                                        <h4 class="modal-title" style="text-align: center">Supprimer UE</h4>
+                                    </div>
+
+                                    <form th:action="@{/ChefDepartement/SupprimerUE}" method="post">
+                                        <div class="modal-body" >
+                                            <div style="display: none">
+                                                <input name="id" th:value="${ue.id}" />
+                                            </div>
+                                            <div class="form-group">
+                                                <label >Code</label> :
+                                                <span th:text="${ue.code}"/> </span>
+
+                                                <label >Libelle</label> :
+                                                <span th:text="${ue.libelle}"/> </span>
+
+                                                <label >Coefficient</label> :
+                                                <span th:text="${ue.coeff}"/> </span>
+
+                                                <label >Credit</label> :
+                                                <span th:text="${ue.credit}"/> </span>
+
+
+                                            </div>
+
+                                        </div>
+
+                                        <div class="modal-footer" >
+                                            <div class="row">
+                                                <div class="col-lg-3  col-md-3 col-sm-3 col-xs-4">
+                                                    <button type="submit" class="btn btn-danger">Supprimer</button>
+                                                </div>
+                                                <div class="col-lg-offset-5 col-lg-3 col-md-offset-5 col-md-3 col-sm-offset-5 col-sm-3 col-xs-8">
+                                                    <button type="button" class="btn btn-default " data-dismiss="modal">Annuler</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Fin popup supprimer un Etudiant -->
+
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+
+        <script>
+            $(document).ready(function() {
+                $("#table_UE").DataTable({
+
+                });
+            })
+        </script>
+
+
+    </div>
+
+</div>
+
+</body>
+</html>

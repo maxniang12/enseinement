@@ -88,6 +88,13 @@ public class GestionEnseignementApplication implements CommandLineRunner {
 		ue1.setCoeff(8);
 		ueService.ajouterUE(ue1);
 
+		UE ue2 = new UE();
+		ue2.setCode("NTD124");
+		ue2.setLibelle("Algoritme et Programmation");
+		ue2.setCredit(8);
+		ue2.setCoeff(6);
+		ueService.ajouterUE(ue2);
+
 	}
 
 

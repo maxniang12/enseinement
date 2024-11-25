@@ -13,7 +13,6 @@ import uasz.sn.Gestion_Enseignement.maquette.modele.EC;
 import uasz.sn.Gestion_Enseignement.maquette.modele.UE;
 import uasz.sn.Gestion_Enseignement.maquette.service.ECService;
 import uasz.sn.Gestion_Enseignement.maquette.service.UEService;
-
 import java.security.Principal;
 import java.util.List;
 

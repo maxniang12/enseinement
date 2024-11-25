@@ -21,5 +21,4 @@ public class UE {
     private int credit;
     @OneToMany
     private List<EC> EC;
-
 }

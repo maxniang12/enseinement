@@ -17,11 +17,11 @@ import java.util.List;
 @Controller
 @AllArgsConstructor
 public class UEController {
-    @Autowired
+
     private UEService ueService;
-    @Autowired
+
     private UtilisateurService utilisateurService;
-    @Autowired
+
     private ECService ecService;
 
     @GetMapping("/ChefDepartement/UE")

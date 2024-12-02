@@ -15,9 +15,15 @@ public class Formation {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private  long id ;
-    private String nom;
+    @Column(unique=true)
+    private String nomFormation;
+    private boolean archive=false;
     @OneToMany
     private List<Classe> classe;
+
+    public  Boolean isArchive(){
+        return archive;
+    }
 
 }
 

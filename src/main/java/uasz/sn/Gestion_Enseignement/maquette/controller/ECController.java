@@ -20,12 +20,11 @@ import java.util.List;
 @AllArgsConstructor
 public class ECController {
 
-    @Autowired
+
     private ECService ecService;
-    @Autowired
+
     private UEService ueService;
 
-    @Autowired
     private UtilisateurService utilisateurService;
 
     @GetMapping("/ChefDepartement/EC")

@@ -14,9 +14,9 @@ public class ECService {
     @Autowired
     private ECRepository ecRepository;
 
-    public List<EC> listerEC(){
-        return  ecRepository.findAll();
-    }
+    //public List<EC> listerEC(){
+       // return  ecRepository.findAll();
+   // }
 
     public  EC  ajouterEC(EC ec){
         return ecRepository.save(ec);

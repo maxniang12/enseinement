@@ -13,5 +13,14 @@ public class Classe {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private  long id ;
+    @Column(unique=true)
     private String  nom;
+    private boolean archive=false;
+    @ManyToOne
+    private Formation formation;
+
+    public  Boolean isArchive(){
+        return archive;
+    }
+
 }

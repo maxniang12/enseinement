@@ -43,6 +43,12 @@ public class FormationController {
         formationService.ModifierFormation(formation);
         return "redirect:/ChefDepartement/Formation";
     }
+    @PostMapping("/ChefDepartement/ArchifFormation")
+        public String Archif_Formation(Long id ) {
+            formationService.ArchiverFormation(id);
+            return "redirect:/ChefDepartement/Formation";
+    }
+
 
 
 

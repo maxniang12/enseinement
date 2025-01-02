@@ -89,6 +89,9 @@ public class UtilisateurController {
         else if(utilisateur.getRoles().get(0).getRole().equals("ChefDepartement")) {
             url="redirect:/ChefDepartement/profile";
         }
+        else if(utilisateur.getRoles().get(0).getRole().equals("Etudiant")) {
+            url="redirect:/Etudiant/profile";
+        }
 
         return url;
         //spring.jpa.show-sql=true

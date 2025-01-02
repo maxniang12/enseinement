@@ -15,6 +15,7 @@ public class SecurityConfig {
     private static  final  String[] FOR_PERMANANT={"/Permanant/**"};
     private static  final  String[] FOR_VACATAIRE={"/Vacataire/**"};
     private static  final String[] FOR_CHEFDEPARTEMENT={"/ChefDepartement/**"};
+    private static final String[] FOR_ETUDIANT={"/Etudiant/**"};
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
@@ -31,6 +32,7 @@ public class SecurityConfig {
                              .requestMatchers(FOR_PERMANANT).hasRole("Permanent")
                              .requestMatchers(FOR_VACATAIRE).hasRole("Vacataire")
                              .requestMatchers(FOR_CHEFDEPARTEMENT).hasRole("ChefDepartement")
+                             .requestMatchers(FOR_ETUDIANT).hasRole("Etudiant")
                              .anyRequest().authenticated()
 
              )

@@ -29,5 +29,6 @@ public class ClasseController {
     List<Classe> listeClasse = classeService.ListerClasses();
     model.addAttribute("listeClasse", listeClasse);
     return "templateClasse";
+
 }
 }

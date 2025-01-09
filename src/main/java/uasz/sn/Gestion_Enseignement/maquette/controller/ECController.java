@@ -83,9 +83,9 @@ public class ECController {
     }
 
     @PostMapping("/ChefDepartement/SupprimerEC")
-    public String supprimer_EC( @RequestParam("id") Long id ,EC ec) {
-        ecService.recherherEC(ec.getId());
-       ecService.supprimerEC(id);
+    public String supprimer_EC( @RequestParam("id") Long id /*represente id de ue */,Long ecId) {
+
+        ecService.supprimerEC(ecId);
 
         return  "redirect:/ChefDepartement/EC?id="+id;
 

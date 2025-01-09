@@ -186,49 +186,49 @@
                                     </div>
 
                                     <form th:action="@{/ChefDepartement/SupprimerEC}" method="post">
-                                        <div class="modal-body" >
-                                            <div style="display: none">
-                                                <input name="id" th:value="${ec.id}" />
-                                            </div>
+                                        <div class="modal-body">
+                                            <!-- ID de l'UE (nécessaire pour la redirection après suppression) -->
+                                            <input type="hidden" name="id" th:value="${ue.id}" />
+
+                                            <!-- ID de l'EC à supprimer -->
+                                            <input type="hidden" name="ecId" th:value="${ec.id}" />
+
                                             <div class="form-group">
-                                                <label >Code</label> :
-                                                <span th:text="${ec.code}"/> </span>
+                                                <label>Code</label> :
+                                                <span th:text="${ec.code}"></span>
 
-                                                <label >Libelle</label> :
-                                                <span th:text="${ec.libelle}"/> </span>
+                                                <label>Libelle</label> :
+                                                <span th:text="${ec.libelle}"></span>
 
-                                                <label >Coefficient</label> :
-                                                <span th:text="${ec.coeff}"/> </span>
+                                                <label>Coefficient</label> :
+                                                <span th:text="${ec.coeff}"></span>
 
-                                                <label >TP</label> :
-                                                <span th:text="${ec.tp}"/> </span>
+                                                <label>TP</label> :
+                                                <span th:text="${ec.tp}"></span>
 
-                                                <label >TD</label> :
-                                                <span th:text="${ec.td}"/> </span>
+                                                <label>TD</label> :
+                                                <span th:text="${ec.td}"></span>
 
-                                                <label >CM</label> :
-                                                <span th:text="${ec.cm}"/> </span>
+                                                <label>CM</label> :
+                                                <span th:text="${ec.cm}"></span>
 
-                                                <label >TPE</label> :
-                                                <span th:text="${ec.tpe}"/> </span>
-
-
-
+                                                <label>TPE</label> :
+                                                <span th:text="${ec.tpe}"></span>
                                             </div>
-
                                         </div>
 
-                                        <div class="modal-footer" >
+                                        <div class="modal-footer">
                                             <div class="row">
-                                                <div class="col-lg-3  col-md-3 col-sm-3 col-xs-4">
+                                                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-4">
                                                     <button type="submit" class="btn btn-danger">Supprimer</button>
                                                 </div>
                                                 <div class="col-lg-offset-5 col-lg-3 col-md-offset-5 col-md-3 col-sm-offset-5 col-sm-3 col-xs-8">
-                                                    <button type="button" class="btn btn-default " data-dismiss="modal">Annuler</button>
+                                                    <button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
                                                 </div>
                                             </div>
                                         </div>
                                     </form>
+
                                 </div>
                             </div>
                         </div>

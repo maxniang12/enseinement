@@ -1,10 +1,252 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="template_chefDepartement">>
 <head>
     <meta charset="UTF-8">
-    <title></title>
+    <title>Title</title>
 </head>
 <body>
+<div layout:fragment="custom-content">
+
+    <div class="container">
+        <h3 class="text-center">La liste des classe de la formation : <span th:text="${nomFormation +' 200000'}"></span></h3>
+
+        <div class="row" style="padding-bottom: 10px; padding-top: 10px">
+            <div style="text-align: center">
+                <button type="button" class="btn btn-success" data-toggle="modal" data-target="#form_Ajouter_EC" >Ajouter EC</button>
+            </div>
+        </div>
+
+        <div data-dismiss="modal" style="margin-top:25px">
+            <div class="modal fade" id="form_Ajouter_EC">
+                <div class="modal-dialog" >
+                    <div class="modal-content panel-success" >
+                        <!--modal Header-->
+                        <div class="modal-header panel-heading" >
+                            <button type="button" class="close" data-dismiss="modal">x</button>
+                            <h4 class="modal-title" style="text-align: center">Ajouter un EC</h4>
+                        </div>
+                        <!--modal Body-->
+                        <form th:action="@{/ChefDepartement/AjouterEC}" method="post">
+                            <div class="modal-body" >
+                                <div class="form-group">
+
+                                    <label >Libelle</label>
+                                    <input type="text" class="form-control" name="libelle" />
+
+                                    <label >CODE</label>
+                                    <input type="text" class="form-control" name="code" />
+
+
+                                    <label >Coefficient</label>
+                                    <input type="number" class="form-control" name="coeff" />
+
+                                    <label >TP</label>
+                                    <input type="number" class="form-control" name="tp"/>
+
+
+                                    <label >TD</label>
+                                    <input type="number" class="form-control" name="td" />
+
+                                    <label >CM</label>
+                                    <input type="number" class="form-control" name="cm"/>
+
+                                    <label >TPE</label>
+                                    <input type="number" class="form-control" name="tpe"/>
+
+                                    <label>UE</label>
+
+                                    <select name="ue" class="form-control" required>
+                                        <option value="">-- Sélectionnez une UE --</option>
+                                        <option th:each="ue : ${listeUE}" th:value="${ue.id}" th:text="${ue.libelle}"></option>
+                                    </select>
+
+
+                                    <!--
+                                     <label >Description</label>
+                                     <input type="text" class="form-control" name="description" />
+                                    -->
+
+                                </div>
+
+                            </div>
+                            <!--modal Footer-->
+                            <div class="modal-footer" >
+                                <div class="row">
+                                    <div class="col-lg-3  col-md-3 col-sm-3 col-xs-4">
+                                        <button type="submit" class="btn btn-success">Ajouter</button>
+                                    </div>
+                                    <div class="col-lg-offset-5 col-lg-3 col-md-offset-5 col-md-3 col-sm-offset-5 col-sm-3 col-xs-8">
+                                        <button type="submit" class="btn btn-default " data-dismiss="modal">Annuler</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="table-responsive">
+            <table class="table table-bordered table-striped" id="table_UE">
+                <thead>
+                <tr>
+                    <th>Code>
+                    <th>Libelle</th>
+                    <th>TP</th>
+                    <th>TD</th>
+
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td ></td>
+
+                    <td>
+                        <button  class="btn btn-info btn-sm" data-title="Edit" data-toggle="modal">Modifier</button>
+                        <button class="btn btn-danger btn-sm" data-title="Delete" data-toggle="modal">supprimer</button>
+                    </td>
+
+
+                    <div data-dismiss="modal">
+                        <div class="modal fade" th:attr="id='form_Modifier_EC'+${ec.id}">
+                            <div class="modal-dialog" >
+                                <div class="modal-content panel-info" >
+
+                                    <div class="modal-header panel-heading" >
+                                        <button type="button" class="close" data-dismiss="modal">x</button>
+                                        <h4 class="modal-title" style="text-align: center">Modifier EC</h4>
+                                    </div>
+
+                                    <form th:action="@{/ChefDepartement/ModifierEC}" method="post">
+                                        <div class="modal-body" >
+                                            <div style="display: none">
+                                                <input name="id" />
+                                            </div>
+                                            <div class="form-group">
+                                                <label >Code</label>
+                                                <input type="text" class="form-control" name="code" />
+
+                                                <label >Libelle</label>
+                                                <input type="text" class="form-control" name="libelle"  th:value="${ec.libelle}"/>
+
+                                                <label >Coefficient</label>
+                                                <input type="number" class="form-control" name="coeff" th:value="${ec.coeff}" />
+
+                                                <label >TP</label>
+                                                <input type="number" class="form-control" name="tp"  th:value="${ec.tp}"/>
+
+                                                <label >TD</label>
+                                                <input type="number" class="form-control" name="td"  th:value="${ec.td}"/>
+
+                                                <label >CM</label>
+                                                <input type="number" class="form-control" name="cm"  th:value="${ec.cm}"/>
+
+                                                <label >TPE</label>
+                                                <input type="number" class="form-control" name="tpe"  th:value="${ec.tpe}"/>
+
+                                            </div>
+
+                                        </div>
+
+                                        <div class="modal-footer" >
+                                            <div class="row">
+                                                <div class="col-lg-3  col-md-3 col-sm-3 col-xs-4">
+                                                    <button type="submit" class="btn btn-info" >Modifier</button>
+                                                </div>
+                                                <div class="col-lg-offset-5 col-lg-3 col-md-offset-5 col-md-3 col-sm-offset-5 col-sm-3 col-xs-8">
+                                                    <button type="button" class="btn btn-default " data-dismiss="modal">Annuler</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div data-dismiss="modal">
+                        <div class="modal fade" th:attr="id='form_Supprimer_EC'+${ec.id}">
+                            <div class="modal-dialog" >
+                                <div class="modal-content panel-danger" >
+
+                                    <div class="modal-header panel-heading" >
+                                        <button type="button" class="close" data-dismiss="modal">x</button>
+                                        <h4 class="modal-title" style="text-align: center">Supprimer UE</h4>
+                                    </div>
+
+                                    <form th:action="@{/ChefDepartement/SupprimerEC}" method="post">
+                                        <div class="modal-body">
+                                            <!-- ID de l'UE (nécessaire pour la redirection après suppression) -->
+                                            <input type="hidden" name="id" th:value="${ue.id}" />
+
+                                            <!-- ID de l'EC à supprimer -->
+                                            <input type="hidden" name="ecId" th:value="${ec.id}" />
+
+                                            <div class="form-group">
+                                                <label>Code</label> :
+                                                <span th:text="${ec.code}"></span>
+
+                                                <label>Libelle</label> :
+                                                <span th:text="${ec.libelle}"></span>
+
+                                                <label>Coefficient</label> :
+                                                <span th:text="${ec.coeff}"></span>
+
+                                                <label>TP</label> :
+                                                <span th:text="${ec.tp}"></span>
+
+                                                <label>TD</label> :
+                                                <span th:text="${ec.td}"></span>
+
+                                                <label>CM</label> :
+                                                <span th:text="${ec.cm}"></span>
+
+                                                <label>TPE</label> :
+                                                <span th:text="${ec.tpe}"></span>
+                                            </div>
+                                        </div>
+
+                                        <div class="modal-footer">
+                                            <div class="row">
+                                                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-4">
+                                                    <button type="submit" class="btn btn-danger">Supprimer</button>
+                                                </div>
+                                                <div class="col-lg-offset-5 col-lg-3 col-md-offset-5 col-md-3 col-sm-offset-5 col-sm-3 col-xs-8">
+                                                    <button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </tr>
+
+
+                </tbody>
+
+            </table>
+
+
+        </div>
+        <script>
+            $(document).ready(function() {
+                $("#table_UE").DataTable({
+
+                });
+            })
+        </script>
+
+    </div>
+
+</div>
 
 </body>
 </html>

@@ -9,7 +9,9 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import uasz.sn.Gestion_Enseignement.authentification.modele.Role;
 import uasz.sn.Gestion_Enseignement.authentification.service.UtilisateurService;
 import uasz.sn.Gestion_Enseignement.maquette.modele.EC;
+import uasz.sn.Gestion_Enseignement.maquette.modele.Formation;
 import uasz.sn.Gestion_Enseignement.maquette.modele.UE;
+import uasz.sn.Gestion_Enseignement.maquette.service.FormationService;
 import uasz.sn.Gestion_Enseignement.maquette.service.UEService;
 import uasz.sn.Gestion_Enseignement.utilisateur.modele.Permanant;
 import uasz.sn.Gestion_Enseignement.utilisateur.modele.Vacataire;
@@ -27,6 +29,8 @@ public class GestionEnseignementApplication implements CommandLineRunner {
 	private PasswordEncoder passwordEncoder;
 	@Autowired
 	private UEService ueService;
+    @Autowired
+    private FormationService formationService;
 
 	public PasswordEncoder passwordEncoder() {
 		return new BCryptPasswordEncoder();
@@ -95,7 +99,21 @@ public class GestionEnseignementApplication implements CommandLineRunner {
 		ue2.setCoeff(6);
 		ueService.ajouterUE(ue2);
 
+
+
+
+		/*
+
+		Formation  f1= new Formation();
+		f1.setNomFormation("L2i_Informatique");
+		formationService.ajouterFormation(f1);
+		Formation  f2= new Formation();
+		f2.setNomFormation("Mathematique");
+		formationService.ajouterFormation(f2);
+		 */
+
 	}
+	
 
 
 }

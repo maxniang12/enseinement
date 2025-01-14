@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="template_chefDepartement">>
+      layout:decorate="template_chefDepartement">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
@@ -187,7 +187,7 @@
 
                                     <form th:action="@{/ChefDepartement/SupprimerEC}" method="post">
                                         <div class="modal-body">
-                                            <!-- ID de l'UE (nécessaire pour la redirection après suppression) -->
+                                            <!-- ID de l'UE (nécessaire pour la redirection après suppression -->
                                             <input type="hidden" name="id" th:value="${ue.id}" />
 
                                             <!-- ID de l'EC à supprimer -->

@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="template_chefDepartement">>
+      layout:decorate="template_chefDepartement">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
@@ -9,16 +9,16 @@
 <div layout:fragment="custom-content">
 
     <div class="container">
-        <h3 class="text-center">La liste des classe de la formation : <span th:text="${nomFormation +' 200000'}"></span></h3>
+        <h3 style="text-align: center;color: #033609;background-color: rgba(241,174,63,0.2)">La liste des classe de la formation : <span th:text="${nomFormation}"></span></h3>
 
         <div class="row" style="padding-bottom: 10px; padding-top: 10px">
             <div style="text-align: center">
-                <button type="button" class="btn btn-success" data-toggle="modal" data-target="#form_Ajouter_EC" >Ajouter EC</button>
+                <button type="button" class="btn btn-success" data-toggle="modal" data-target="#form_Ajouter_Classe" >Ajouter Classe</button>
             </div>
         </div>
 
         <div data-dismiss="modal" style="margin-top:25px">
-            <div class="modal fade" id="form_Ajouter_EC">
+            <div class="modal fade" id="form_Ajouter_Classe">
                 <div class="modal-dialog" >
                     <div class="modal-content panel-success" >
                         <!--modal Header-->
@@ -27,45 +27,19 @@
                             <h4 class="modal-title" style="text-align: center">Ajouter un EC</h4>
                         </div>
                         <!--modal Body-->
-                        <form th:action="@{/ChefDepartement/AjouterEC}" method="post">
+                        <form th:action="@{/ChefDepartement/AjouterClasse}" method="post">
                             <div class="modal-body" >
                                 <div class="form-group">
 
-                                    <label >Libelle</label>
-                                    <input type="text" class="form-control" name="libelle" />
-
-                                    <label >CODE</label>
-                                    <input type="text" class="form-control" name="code" />
+                                    <label >Nom</label>
+                                    <input type="text" class="form-control" name="nomClasse" />
 
 
-                                    <label >Coefficient</label>
-                                    <input type="number" class="form-control" name="coeff" />
-
-                                    <label >TP</label>
-                                    <input type="number" class="form-control" name="tp"/>
+                                    <div th:each="formation:${formationList}">
+                                        <input type="hidden" name="id" th:value="${formation.id}" />
+                                    </div>
 
 
-                                    <label >TD</label>
-                                    <input type="number" class="form-control" name="td" />
-
-                                    <label >CM</label>
-                                    <input type="number" class="form-control" name="cm"/>
-
-                                    <label >TPE</label>
-                                    <input type="number" class="form-control" name="tpe"/>
-
-                                    <label>UE</label>
-
-                                    <select name="ue" class="form-control" required>
-                                        <option value="">-- Sélectionnez une UE --</option>
-                                        <option th:each="ue : ${listeUE}" th:value="${ue.id}" th:text="${ue.libelle}"></option>
-                                    </select>
-
-
-                                    <!--
-                                     <label >Description</label>
-                                     <input type="text" class="form-control" name="description" />
-                                    -->
 
                                 </div>
 
@@ -88,69 +62,56 @@
         </div>
 
         <div class="table-responsive">
-            <table class="table table-bordered table-striped" id="table_UE">
+            <table  class="table table-bordered table-striped" id="table_Classe">
                 <thead>
                 <tr>
-                    <th>Code>
-                    <th>Libelle</th>
-                    <th>TP</th>
-                    <th>TD</th>
-
+                    <th>NOM</th>
+                    <th style="text-align:center" colspan="2">actions</th>
                 </tr>
                 </thead>
                 <tbody>
-                <tr>
-                    <td></td>
-                    <td></td>
-                    <td ></td>
-
+                <tr th:each="cl:${listeClasse}">
+                    <td th:text="${cl.nomClasse}"></td>
                     <td>
-                        <button  class="btn btn-info btn-sm" data-title="Edit" data-toggle="modal">Modifier</button>
-                        <button class="btn btn-danger btn-sm" data-title="Delete" data-toggle="modal">supprimer</button>
+                        <button class="btn btn-info btn-sm" data-title="Edit" data-toggle="modal" th:attr="data-target='#form_Modifier_Classe'+${cl.id}">
+                            Modifier
+                        </button>
+                        <button th:if="${cl.isArchive() == false}" class="btn btn-warning btn-xs" data-toggle="modal" th:attr="data-target='#form_Archiver_Classe'+${cl.id}">
+                            Archiver
+                        </button>
+                        <button th:if="${cl.isArchive() == true}" class="btn btn-primary btn-xs" data-toggle="modal" th:attr="data-target='#form_Archiver_Classe'+${cl.id}">
+                            Desarchiver
+                        </button>
+                    </td>
+                    <td>
+                        <a class="btn btn-info btn-sm" >
+                            voir maquette
+                        </a>
                     </td>
 
-
                     <div data-dismiss="modal">
-                        <div class="modal fade" th:attr="id='form_Modifier_EC'+${ec.id}">
+                        <div class="modal fade" th:attr="id='form_Modifier_Classe'+${cl.id}" >
                             <div class="modal-dialog" >
                                 <div class="modal-content panel-info" >
-
+                                    <!--modal Header-->
                                     <div class="modal-header panel-heading" >
                                         <button type="button" class="close" data-dismiss="modal">x</button>
-                                        <h4 class="modal-title" style="text-align: center">Modifier EC</h4>
+                                        <h4 class="modal-title" style="text-align: center">Modifier La Classe</h4>
                                     </div>
-
-                                    <form th:action="@{/ChefDepartement/ModifierEC}" method="post">
+                                    <!--modal Body-->
+                                    <form th:action="@{/ChefDepartement/ModifierClasse}" method="post">
                                         <div class="modal-body" >
                                             <div style="display: none">
-                                                <input name="id" />
+                                                <input name="id" th:value="${cl.id}" />
                                             </div>
+
                                             <div class="form-group">
-                                                <label >Code</label>
-                                                <input type="text" class="form-control" name="code" />
-
-                                                <label >Libelle</label>
-                                                <input type="text" class="form-control" name="libelle"  th:value="${ec.libelle}"/>
-
-                                                <label >Coefficient</label>
-                                                <input type="number" class="form-control" name="coeff" th:value="${ec.coeff}" />
-
-                                                <label >TP</label>
-                                                <input type="number" class="form-control" name="tp"  th:value="${ec.tp}"/>
-
-                                                <label >TD</label>
-                                                <input type="number" class="form-control" name="td"  th:value="${ec.td}"/>
-
-                                                <label >CM</label>
-                                                <input type="number" class="form-control" name="cm"  th:value="${ec.cm}"/>
-
-                                                <label >TPE</label>
-                                                <input type="number" class="form-control" name="tpe"  th:value="${ec.tpe}"/>
-
+                                                <label >Nom Formation</label>
+                                                <input type="text" class="form-control" name="nomClasse" th:value="${cl.nomClasse}"/>
                                             </div>
 
                                         </div>
-
+                                        <!--modal Footer-->
                                         <div class="modal-footer" >
                                             <div class="row">
                                                 <div class="col-lg-3  col-md-3 col-sm-3 col-xs-4">
@@ -167,78 +128,104 @@
                         </div>
                     </div>
 
+                    <!--
+                    archiver ou desarchiver une formation
+                    -->
                     <div data-dismiss="modal">
-                        <div class="modal fade" th:attr="id='form_Supprimer_EC'+${ec.id}">
+                        <div class="modal fade" th:attr="id='form_Archiver_Classe'+${cl.id}">
                             <div class="modal-dialog" >
-                                <div class="modal-content panel-danger" >
 
+                                <div th:if="${cl.isArchive()} == false" class="modal-content panel-warning" >
+                                    <!--modal Header-->
                                     <div class="modal-header panel-heading" >
                                         <button type="button" class="close" data-dismiss="modal">x</button>
-                                        <h4 class="modal-title" style="text-align: center">Supprimer UE</h4>
+                                        <h4 class="modal-title" style="text-align: center">Archiver Classe</h4>
                                     </div>
+                                    <!--modal Body-->
+                                    <form th:action="@{/ChefDepartement/ArchifClasse}" method="post">
+                                        <div class="modal-body" >
+                                            <!-- ID de la formation (pour la redirection après suppression -->
+                                            <input type="hidden" name="id" th:value="${formation.id}" />
 
-                                    <form th:action="@{/ChefDepartement/SupprimerEC}" method="post">
-                                        <div class="modal-body">
-                                            <!-- ID de l'UE (nécessaire pour la redirection après suppression) -->
-                                            <input type="hidden" name="id" th:value="${ue.id}" />
-
-                                            <!-- ID de l'EC à supprimer -->
-                                            <input type="hidden" name="ecId" th:value="${ec.id}" />
+                                            <!-- ID de la Classe à supprimer -->
+                                            <input type="hidden" name="clId" th:value="${cl.id}" />
 
                                             <div class="form-group">
-                                                <label>Code</label> :
-                                                <span th:text="${ec.code}"></span>
-
-                                                <label>Libelle</label> :
-                                                <span th:text="${ec.libelle}"></span>
-
-                                                <label>Coefficient</label> :
-                                                <span th:text="${ec.coeff}"></span>
-
-                                                <label>TP</label> :
-                                                <span th:text="${ec.tp}"></span>
-
-                                                <label>TD</label> :
-                                                <span th:text="${ec.td}"></span>
-
-                                                <label>CM</label> :
-                                                <span th:text="${ec.cm}"></span>
-
-                                                <label>TPE</label> :
-                                                <span th:text="${ec.tpe}"></span>
+                                                <label >Nom de la classe</label> :
+                                                <span th:text="${cl.nomClasse}"/> </span>
                                             </div>
-                                        </div>
 
-                                        <div class="modal-footer">
+                                        </div>
+                                        <!--modal Footer-->
+                                        <div class="modal-footer" >
                                             <div class="row">
-                                                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-4">
-                                                    <button type="submit" class="btn btn-danger">Supprimer</button>
+                                                <div class="col-lg-3  col-md-3 col-sm-3 col-xs-4">
+                                                    <button type="submit" class="btn btn-warning">Archiver</button>
                                                 </div>
                                                 <div class="col-lg-offset-5 col-lg-3 col-md-offset-5 col-md-3 col-sm-offset-5 col-sm-3 col-xs-8">
-                                                    <button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
+                                                    <button type="button" class="btn btn-default " data-dismiss="modal">Annuler</button>
                                                 </div>
                                             </div>
                                         </div>
                                     </form>
-
                                 </div>
+
+                                <div th:if="${cl.isArchive()} == true" class="modal-content panel-primary" >
+                                    <!--modal Header-->
+                                    <div class="modal-header panel-heading" >
+                                        <button type="button" class="close" data-dismiss="modal">x</button>
+                                        <h4 class="modal-title" style="text-align: center">Desarchiver Classe</h4>
+                                    </div>
+                                    <!--modal Body-->
+                                    <form th:action="@{/ChefDepartement/ArchifClasse}" method="post">
+                                        <div class="modal-body" >
+                                            <!-- ID de la formation (pour la redirection après suppression -->
+                                            <input type="hidden" name="id" th:value="${formation.id}" />
+
+                                            <!-- ID de la Classe à supprimer -->
+                                            <input type="hidden" name="clId" th:value="${cl.id}" />
+
+                                            <div class="form-group">
+                                                <label >Nom de la classe</label> :
+                                                <span th:text="${cl.nomClasse}"/> </span>
+                                            </div>
+                                        </div>
+                                        <!--modal Footer-->
+                                        <div class="modal-footer" >
+                                            <div class="row">
+                                                <div class="col-lg-3  col-md-3 col-sm-3 col-xs-4">
+                                                    <button type="submit" class="btn btn-primary">desarchiver</button>
+                                                </div>
+                                                <div class="col-lg-offset-5 col-lg-3 col-md-offset-5 col-md-3 col-sm-offset-5 col-sm-3 col-xs-8">
+                                                    <button type="button" class="btn btn-default " data-dismiss="modal">Annuler</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+
                             </div>
                         </div>
                     </div>
+                    <!--
+                   fin  archiver ou desarchiver une formation
+                   -->
+
+
+
+
 
 
                 </tr>
-
-
                 </tbody>
 
             </table>
 
-
         </div>
+
         <script>
             $(document).ready(function() {
-                $("#table_UE").DataTable({
+                $("#table_Classe").DataTable({
 
                 });
             })

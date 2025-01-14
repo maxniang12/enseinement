@@ -10,7 +10,6 @@ import uasz.sn.Gestion_Enseignement.authentification.service.UtilisateurService;
 import uasz.sn.Gestion_Enseignement.maquette.modele.Formation;
 import uasz.sn.Gestion_Enseignement.maquette.service.ClasseService;
 import uasz.sn.Gestion_Enseignement.maquette.service.FormationService;
-
 import java.security.Principal;
 import java.util.List;
 
@@ -27,7 +26,7 @@ public class FormationController {
         List<Formation> formationList=formationService.ListerFormations();
         model.addAttribute("formationList", formationList);
         model.addAttribute("nom", utilisateur.getNom());
-        model.addAttribute("prenom", utilisateur.getPrenom());
+        model.addAttribute("prenom", utilisateur.getPrenom().charAt(0));
         return "formation";
     }
 
@@ -35,7 +34,6 @@ public class FormationController {
     public String Ajouter_Formation(Formation formation) {
         formationService.ajouterFormation(formation);
         return "redirect:/ChefDepartement/Formation";
-
     }
 
     @PostMapping("/ChefDepartement/ModifierFormation")
@@ -48,8 +46,4 @@ public class FormationController {
             formationService.ArchiverFormation(id);
             return "redirect:/ChefDepartement/Formation";
     }
-
-
-
-
 }

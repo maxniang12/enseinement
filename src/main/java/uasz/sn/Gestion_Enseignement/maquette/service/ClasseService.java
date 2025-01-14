@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import uasz.sn.Gestion_Enseignement.maquette.modele.Classe;
+import uasz.sn.Gestion_Enseignement.maquette.modele.EC;
 import uasz.sn.Gestion_Enseignement.maquette.modele.Formation;
 import uasz.sn.Gestion_Enseignement.maquette.repository.ClasseRepository;
 
@@ -38,6 +39,10 @@ public class ClasseService {
        Classe classe=classeRepository.findById(id).get();
        return classe;
 
+    }
+
+    public  List<Classe> listeDesClassDeFormation(Long id){
+        return classeRepository.findFormationById(id);
     }
 
 

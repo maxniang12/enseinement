@@ -33,4 +33,7 @@ public class ECService {
     public  List<EC> listeDesECDeUe( Long id){
         return ecRepository.findByUeId(id);
     }
+    public List<EC> listerToutEC(){
+        return ecRepository.findAll();
+    }
 }

@@ -15,14 +15,19 @@ public class Formation {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private  long id ;
-    @Column(unique=true)
     private String nomFormation;
-    private boolean archive=false;
+    private  String niveauFormation;
+    private Boolean archive=false;
+    @Column(nullable = false, columnDefinition = "BOOLEAN DEFAULT TRUE")
+    private Boolean active=true;
     @OneToMany
-    private List<Classe> classe;
+    private List<Maquette> maquettes;
 
     public  Boolean isArchive(){
         return archive;
+    }
+    public boolean isActive() {
+        return active;
     }
 
 }

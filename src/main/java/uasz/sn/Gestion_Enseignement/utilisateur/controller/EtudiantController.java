@@ -1,5 +1,6 @@
 package uasz.sn.Gestion_Enseignement.utilisateur.controller;
 
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -9,10 +10,10 @@ import uasz.sn.Gestion_Enseignement.authentification.modele.Utilisateur;
 import uasz.sn.Gestion_Enseignement.authentification.service.UtilisateurService;
 
 import java.security.Principal;
-
+@AllArgsConstructor
 @Controller
 public class EtudiantController {
-    @Autowired
+
     private UtilisateurService utilisateurService;
 
     @RequestMapping(value = "/etudiant/Accueil", method = RequestMethod.GET)

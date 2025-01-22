@@ -35,9 +35,10 @@
                                     <input type="text" class="form-control" name="nomClasse" />
 
 
-                                    <div th:each="formation:${formationList}">
-                                        <input type="hidden" name="id" th:value="${formation.id}" />
-                                    </div>
+                                    <select name="id" class="form-control" required>
+                                        <option value="">selction formation</option>
+                                        <option th:each="formation: ${formationList}" th:value="${formation.id}" th:text="${formation.nomFormation}"></option>
+                                    </select>
 
 
 
@@ -84,7 +85,7 @@
                         </button>
                     </td>
                     <td>
-                        <a class="btn btn-info btn-sm" >
+                        <a class="btn btn-info btn-sm" th:href="@{/ChefDepartement/Maquette(id=${cl.id})}" >
                             voir maquette
                         </a>
                     </td>

@@ -15,6 +15,6 @@ public interface ClasseRepository extends JpaRepository<Classe, Long> {
     Formation findClasseByName(@Param("nom") String nom);
     */
 
-    List<Classe> findFormationById(Long fId);
+
 
 }

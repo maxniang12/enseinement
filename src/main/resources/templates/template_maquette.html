@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="template_chefDepartement">
+<head>
+    <meta charset="UTF-8">
+    <title> page Maquette</title>
+</head>
+<body>
+<div layout:fragment="custom-content" class="container">
+
+    <h3 class="text-center" >La liste des maquettte de la formation  : <span th:text="${formation.nomFormation+' -- '+formation.niveauFormation}"></span></h3>
+
+    <ul class="nav nav-tabs">
+         <li class="active"><a data-toggle="tab" href="#tab_Sem1">semestre 1</a></li>
+         <li><a  data-toggle="tab" href="#tab_Sem2">semestre 2</a></li>
+    </ul>
+
+    <div class="tab-content">
+
+        <div id="tab_Sem1" class="tab-pane fade in active">
+            <div class="row" style="padding-bottom: 10px; padding-top: 10px">
+                <div style="text-align: center">
+                    <button type="button" class="btn btn-success" data-toggle="modal" data-target="#form_Ajouter_M" >Ajouter</button>
+                </div>
+            </div>
+
+            <div data-dismiss="modal" style="margin-top:25px">
+                <div class="modal fade" id="form_Ajouter_M">
+                    <div class="modal-dialog" >
+                        <div class="modal-content panel-success" >
+                            <!--modal Header-->
+                            <div class="modal-header panel-heading" >
+                                <button type="button" class="close" data-dismiss="modal">x</button>
+                                <h4 class="modal-title" style="text-align: center">Ajouter Maquette</h4>
+                            </div>
+                            <!--modal Body-->
+                            <form th:action="@{/ChefDepartement/AjouterMaquette}" method="post">
+                                <div class="modal-body" >
+                                    <div class="form-group">
+
+                                        <label>Nom de la maquette</label>
+                                        <input type="text" class="form-control" name="nomMaquette" />
+
+                                        <label>Cocher des UE</label>
+
+                                        <div  th:each="ue:${listeUE}">
+                                            <input type="checkbox" th:value="${ue.id}" name="ueIds"/>
+                                            <span th:text="${ue.libelle}"></span>
+                                        </div>
+
+                                    </div>
+
+                                </div>
+                                <!--modal Footer-->
+                                <div class="modal-footer" >
+                                    <div class="row">
+                                        <div class="col-lg-3  col-md-3 col-sm-3 col-xs-4">
+                                            <button type="submit" class="btn btn-success">Ajouter</button>
+                                        </div>
+                                        <div class="col-lg-offset-5 col-lg-3 col-md-offset-5 col-md-3 col-sm-offset-5 col-sm-3 col-xs-8">
+                                            <button type="submit" class="btn btn-default " data-dismiss="modal">Annuler</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="table-responsive">
+                <table class="table table-bordered table-striped" id="table_Maquette">
+                    <thead class="table-light">
+                    <tr>
+                        <th rowspan="2" class="text-center align-middle">UNITÉS D'ENSEIGNEMENT</th>
+                        <th>Crédits</th>
+                        <th>Coeff UE</th>
+                        <th colspan="7" >ÉLÉMENTS CONSTITUTIFS</th>
+
+                    </tr>
+                    <tr>
+                        <th>Intitulés</th>
+                        <th>CM</th>
+                        <th>TD</th>
+                        <th>TP</th>
+                        <th>CM + TD/TP</th>
+                        <th>TPE</th>
+                        <th>Coeff.</th>
+                    </tr>
+
+
+
+                    </thead>
+                    <tbody>
+                    <tr th:each="ue:${listeUE}">
+                        <td th:text="${ue.code}+ '--'+ ${ue.libelle}" ></td>
+                        <td class="text-center" th:text="${ue.credit}"></td>
+                        <td class="text-center" th:text="${ue.coeff}"></td>
+                    </tr>
+
+                    <tr>
+                        <td rowspan="2"></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td class="text-center"></td>
+                        <td class="text-center"></td>
+                        <td class="text-center"></td>
+                        <td class="text-center"></td>
+                        <td class="text-center"></td>
+                        <td class="text-center"></td>
+                    </tr>
+
+
+                    </tbody>
+
+                    </table>
+
+
+
+
+
+                    <script>
+                        $(document).ready(function() {
+                            $("#table_Maquette").DataTable({
+
+                            });
+                        })
+                    </script>
+                </table>
+
+            </div>
+
+
+        </div>
+
+        <div id="tab_Sem2" class="tab-pane fade">
+
+            <div class="row" style="padding-bottom: 10px; padding-top: 10px">
+                <div style="text-align: center">
+                    <button type="button" class="btn btn-success" data-toggle="modal" data-target="#form_Ajouter_maquette" >Ajouter</button>
+                </div>
+            </div>
+
+            <div data-dismiss="modal" style="margin-top:25px">
+                <div class="modal fade" id="form_Ajouter_maquette">
+                    <div class="modal-dialog" >
+                        <div class="modal-content panel-success" >
+                            <!--modal Header-->
+                            <div class="modal-header panel-heading" >
+                                <button type="button" class="close" data-dismiss="modal">x</button>
+                                <h4 class="modal-title" style="text-align: center">Ajouter Maquette</h4>
+                            </div>
+                            <!--modal Body-->
+                            <form th:action="@{/ChefDepartement/AjouterMaquette}" method="post">
+                                <div class="modal-body" >
+                                    <div class="form-group">
+
+                                        <label>Nom de la maquette</label>
+                                        <input type="text" class="form-control" name="nomMaquette" />
+
+                                        <label>Cocher des UE</label>
+
+                                        <div th:each="ue : ${listeUE}">
+                                            <input type="checkbox" th:value="${ue.id}"  />
+                                            <span th:text="${ue.libelle}"></span>
+                                        </div>
+
+                                    </div>
+
+                                </div>
+                                <!--modal Footer-->
+                                <div class="modal-footer" >
+                                    <div class="row">
+                                        <div class="col-lg-3  col-md-3 col-sm-3 col-xs-4">
+                                            <button type="submit" class="btn btn-success">Ajouter</button>
+                                        </div>
+                                        <div class="col-lg-offset-5 col-lg-3 col-md-offset-5 col-md-3 col-sm-offset-5 col-sm-3 col-xs-8">
+                                            <button type="submit" class="btn btn-default " data-dismiss="modal">Annuler</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+
+</div>
+
+</body>
+</html>

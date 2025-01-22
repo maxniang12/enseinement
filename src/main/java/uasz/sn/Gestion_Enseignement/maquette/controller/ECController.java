@@ -36,11 +36,27 @@ public class ECController {
         Utilisateur user=utilisateurService.rechercher_Utilisateur(principal.getName());
         model.addAttribute("nom", user.getNom());
         model.addAttribute("prenom", user.getPrenom());
+        List<EC> listeECTOUt=ecService.listerToutEC();
         List<UE>  listeUE=ueService.listerlUE();
         List<EC> listeEc=ecService.listeDesECDeUe(ue.getId());
         model.addAttribute("listeUE", listeUE);
         model.addAttribute("listeEc", listeEc);
+        model.addAttribute("listeECTOUt", listeECTOUt);
         return "ue_details";
+
+    }
+
+    @GetMapping("/ChefDepartement/ECTout")
+
+        public String lister_ECTout(Model model , Principal principal) {
+
+            Utilisateur user=utilisateurService.rechercher_Utilisateur(principal.getName());
+            model.addAttribute("nom", user.getNom());
+            model.addAttribute("prenom", user.getPrenom());
+            List<EC> listeECTOUt=ecService.listerToutEC();
+            model.addAttribute("listeECTout",listeECTOUt);
+
+            return "template_ec";
 
     }
 

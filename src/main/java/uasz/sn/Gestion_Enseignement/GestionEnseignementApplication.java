@@ -100,18 +100,6 @@ public class GestionEnseignementApplication implements CommandLineRunner {
 		ueService.ajouterUE(ue2);
 
 
-
-
-		/*
-
-		Formation  f1= new Formation();
-		f1.setNomFormation("L2i_Informatique");
-		formationService.ajouterFormation(f1);
-		Formation  f2= new Formation();
-		f2.setNomFormation("Mathematique");
-		formationService.ajouterFormation(f2);
-		 */
-
 	}
 	
 

@@ -37,6 +37,9 @@
                                    <label>Nom de Formation</label>
                                    <input type="text" class="form-control" name="nomFormation" />
 
+                                   <label>Niveau de la formation</label>
+                                   <input type="text" class="form-control" name="niveauFormation" />
+
                                </div>
 
                            </div>
@@ -62,12 +65,15 @@
                <thead>
                <tr>
                    <th>NOM</th>
+                   <th>Niveau</th>
                    <th style="text-align:center" colspan="2">actions</th>
                </tr>
                </thead>
                <tbody>
                <tr th:each="f:${formationList}">
                    <td th:text="${f.nomFormation}"></td>
+                   <td th:text="${f.niveauFormation}"></td>
+
                    <td>
                        <button class="btn btn-info btn-sm" data-title="Edit" data-toggle="modal" th:attr="data-target='#form_Modifier_f'+${f.id}">
                            Modifier
@@ -78,10 +84,18 @@
                        <button th:if="${f.isArchive() == true}" class="btn btn-primary btn-xs" data-toggle="modal" th:attr="data-target='#form_Archiver_f'+${f.id}">
                            Desarchiver
                        </button>
+                       <button th:if="${f.isActive() == false}" class="btn btn-warning btn-xs" data-toggle="modal" th:attr="data-target='#form_Activer_f'+${f.id}">
+                           Activer
+                       </button>
+                       <button th:if="${f.isActive() == true}" class="btn btn-primary btn-xs" data-toggle="modal" th:attr="data-target='#form_Activer_f'+${f.id}">
+                           Desactiver
+                       </button>
+
+
                    </td>
                    <td>
-                       <a class="btn btn-info btn-sm" th:href="@{/ChefDepartement/Classe(id=${f.id})}">
-                           voir classes
+                       <a class="btn btn-info btn-sm" th:href="@{/ChefDepartement/Maquette(id=${f.id})}">
+                           voir la Maquette
                        </a>
                    </td>
 
@@ -104,6 +118,12 @@
                                            <div class="form-group">
                                                <label >Nom Formation</label>
                                                <input type="text" class="form-control" name="nomFormation" th:value="${f.nomFormation}"/>
+                                           </div>
+
+
+                                           <div class="form-group">
+                                               <label >Niveau formation</label>
+                                               <input type="text" class="form-control" name="niveauFormation" th:value="${f.niveauFormation}"/>
                                            </div>
 
                                        </div>
@@ -141,12 +161,17 @@
                                    <form th:action="@{/ChefDepartement/ArchifFormation}" method="post">
                                        <div class="modal-body" >
                                            <div style="display: none">
-                                               <input name="id" th:value="${f.id}" />
+                                               <input  name="id" th:value="${f.id}" />
                                            </div>
 
                                            <div class="form-group">
                                                <label >Nom_Formation</label> :
                                                <span th:text="${f.nomFormation}"/> </span>
+                                           </div>
+
+                                           <div class="form-group">
+                                               <label >Niveau formation</label> :
+                                               <span th:text="${f.niveauFormation}"/> </span>
                                            </div>
 
                                        </div>
@@ -180,6 +205,11 @@
                                                <label >Nom_Formation</label> :
                                                <span th:text="${f.nomFormation}"/> </span>
                                            </div>
+
+                                           <div class="form-group">
+                                               <label >Niveau Formation</label> :
+                                               <span th:text="${f.niveauFormation}"/> </span>
+                                           </div>
                                        </div>
                                        <!--modal Footer-->
                                        <div class="modal-footer" >
@@ -201,10 +231,84 @@
                    <!--
                   fin  archiver ou desarchiver une formation
                   -->
+                   <div data-dismiss="modal">
+                       <div class="modal fade" th:attr="id='form_Activer_f'+${f.id}">
+                           <div class="modal-dialog" >
 
+                               <div th:if="${f.isActive() == false}" class="modal-content panel-success" >
+                                   <!--modal Header-->
+                                   <div class="modal-header panel-heading" >
+                                       <button type="button" class="close" data-dismiss="modal">x</button>
+                                       <h4 class="modal-title" style="text-align: center">Activer  la  Formation</h4>
+                                   </div>
+                                   <!--modal Body-->
+                                   <form th:action="@{/ChefDepartement/activerFormation}" method="post">
+                                       <div class="modal-body" >
+                                           <div style="display: none">
+                                               <input name="id" th:value="${f.id}" />
+                                           </div>
+                                           <div class="form-group">
+                                               <label >Nom Formation</label> :
+                                               <span th:text="${f.nomFormation}"/> </span>
+                                           </div>
+                                           <div class="form-group">
+                                               <label >Niveau Formation</label> :
+                                               <span th:text="${f.niveauFormation}"/> </span>
+                                           </div>
 
+                                       </div>
+                                       <!--modal Footer-->
+                                       <div class="modal-footer" >
+                                           <div class="row">
+                                               <div class="col-lg-3  col-md-3 col-sm-3 col-xs-4">
+                                                   <button type="submit" class="btn btn-success">Activer</button>
+                                               </div>
+                                               <div class="col-lg-offset-5 col-lg-3 col-md-offset-5 col-md-3 col-sm-offset-5 col-sm-3 col-xs-8">
+                                                   <button type="button" class="btn btn-default " data-dismiss="modal">Annuler</button>
+                                               </div>
+                                           </div>
+                                       </div>
+                                   </form>
+                               </div>
 
+                               <div th:if="${f.isActive() == true}" class="modal-content panel-danger" >
+                                   <!--modal Header-->
+                                   <div class="modal-header panel-heading" >
+                                       <button type="button" class="close" data-dismiss="modal">x</button>
+                                       <h4 class="modal-title" style="text-align: center">Desactiver  la Formation</h4>
+                                   </div>
+                                   <!--modal Body-->
+                                   <form th:action="@{/ChefDepartement/activerFormation}" method="post">
+                                       <div class="modal-body" >
+                                           <div style="display: none">
+                                               <input name="id" th:value="${f.id}" />
+                                           </div>
+                                           <div class="form-group">
+                                               <label >Nom Formation</label> :
+                                               <span th:text="${f.nomFormation}"/> </span>
+                                           </div>
+                                           <div class="form-group">
+                                               <label >Niveau Formation</label> :
+                                               <span th:text="${f.niveauFormation}"/> </span>
+                                           </div>
+                                       </div>
+                                       <!--modal Footer-->
+                                       <div class="modal-footer" >
+                                           <div class="row">
+                                               <div class="col-lg-3  col-md-3 col-sm-3 col-xs-4">
+                                                   <button type="submit" class="btn btn-danger">Desactiver</button>
+                                               </div>
+                                               <div class="col-lg-offset-5 col-lg-3 col-md-offset-5 col-md-3 col-sm-offset-5 col-sm-3 col-xs-8">
+                                                   <button type="button" class="btn btn-default " data-dismiss="modal">Annuler</button>
+                                               </div>
+                                           </div>
+                                       </div>
+                                   </form>
+                               </div>
 
+                           </div>
+                       </div>
+                   </div>
 
 
                </tr>

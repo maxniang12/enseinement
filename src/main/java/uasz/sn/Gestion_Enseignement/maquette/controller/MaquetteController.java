@@ -1,5 +1,79 @@
 package uasz.sn.Gestion_Enseignement.maquette.controller;
 
+
+import lombok.AllArgsConstructor;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import uasz.sn.Gestion_Enseignement.authentification.modele.Utilisateur;
+import uasz.sn.Gestion_Enseignement.authentification.service.UtilisateurService;
+import uasz.sn.Gestion_Enseignement.maquette.modele.Classe;
+import uasz.sn.Gestion_Enseignement.maquette.modele.Formation;
+import uasz.sn.Gestion_Enseignement.maquette.modele.Maquette;
+import uasz.sn.Gestion_Enseignement.maquette.modele.UE;
+import uasz.sn.Gestion_Enseignement.maquette.repository.UERepository;
+import uasz.sn.Gestion_Enseignement.maquette.service.*;
+
+import java.security.Principal;
+import java.util.Collection;
+import java.util.List;
+
+@Controller
+@AllArgsConstructor
 public class MaquetteController {
+private MaquetteService maquetteService;
+private UtilisateurService utilisateurService;
+private FormationService formationService;
+private UEService ueService;
+private ECService ecService;
+private UERepository ueRepository;
+
+
+
+@GetMapping("/ChefDepartement/Maquette")
+    public String lister_Maquette(Model model, Principal principal, @RequestParam("id") Long id) {
+    Utilisateur use=utilisateurService.rechercher_Utilisateur(principal.getName());
+    Formation formation= formationService.rechercherFormation(id);
+
+    List<Maquette> listeMaquette=maquetteService.ListerMaquetteByFormation(formation.getId());
+
+    List<Formation> formationList=formationService.ListerFormations();
+
+    List<UE> listeUE=ueService.listerlUE();
+
+
+    model.addAttribute("nom",use.getNom());
+    model.addAttribute("prenom",use.getPrenom());
+    model.addAttribute("listeMaquette",listeMaquette);
+    model.addAttribute("formation",formation);
+    model.addAttribute("listeUE",listeUE);
+    model.addAttribute("formationList",formationList);
+    return "template_maquette";
+
+}
+
+
+@PostMapping("/ChefDepartement/AjouterMaquette")
+    public String Ajouter_Maquette(@RequestParam("nomMaquette") String nomMaquette,@RequestParam("ueIds") List<Long> ueIds,@RequestParam("id") Long id
+          ){
+    Formation formation=formationService.rechercherFormation(id);
+    List<UE> selectedUEs = ueRepository.findAllById(ueIds);
+    Maquette maquette=new Maquette();
+    maquette.setNomMaquette(nomMaquette);
+    maquette.setUE(selectedUEs);
+    maquette.setFormation(formation);
+    maquetteService.AjouterMaquette(maquette);
+    return "redirect:/ChefDepartement/Maquette";
+
+}
+
+
+
+
+
+
+
 
 }

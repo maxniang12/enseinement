@@ -24,21 +24,21 @@ public class ClasseController {
     private ClasseService classeService;
     private UtilisateurService utilisateurService;
     private FormationService formationService;
-@GetMapping("/ChefDepartement/Classe")
-    public String Lister_Classe(Model model, Principal principal, @RequestParam("id") Long id) {
-    Utilisateur utilisateur=utilisateurService.rechercher_Utilisateur(principal.getName());
-    Formation formation= formationService.rechercherFormation(id);
-    model.addAttribute("formation", formation);
-    model.addAttribute("nom", utilisateur.getNom());
-    model.addAttribute("prenom", utilisateur.getPrenom());
-    List<Formation> formationList=formationService.ListerFormations();
-    model.addAttribute("nomFormation", formation.getNomFormation());
-    List<Classe> listeClasse = classeService.listeDesClassDeFormation(formation.getId());
-    model.addAttribute("listeClasse", listeClasse);
-    model.addAttribute("formationList", formationList);
-    return "template_classe";
-
-}
+//@GetMapping("/ChefDepartement/Classe")
+//    public String Lister_Classe(Model model, Principal principal, @RequestParam("id") Long id) {
+//    Utilisateur utilisateur=utilisateurService.rechercher_Utilisateur(principal.getName());
+//    Formation formation= formationService.rechercherFormation(id);
+//    model.addAttribute("formation", formation);
+//    model.addAttribute("nom", utilisateur.getNom());
+//    model.addAttribute("prenom", utilisateur.getPrenom());
+//    List<Formation> formationList=formationService.ListerFormations();
+//    model.addAttribute("nomFormation", formation.getNomFormation());
+//    List<Classe> listeClasse = classeService.listeDesClassDeFormation(formation.getId());
+//    model.addAttribute("listeClasse", listeClasse);
+//    model.addAttribute("formationList", formationList);
+//    return "template_classe";
+//
+//}
 @PostMapping("/ChefDepartement/AjouterClasse")
     public String Ajouter_Classe( @RequestParam("nomClasse") String nomclasse,@RequestParam("id") Long fId){
     Formation formation=formationService.rechercherFormation(fId);

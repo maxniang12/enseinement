@@ -10,6 +10,8 @@ import uasz.sn.Gestion_Enseignement.authentification.service.UtilisateurService;
 import uasz.sn.Gestion_Enseignement.maquette.modele.Formation;
 import uasz.sn.Gestion_Enseignement.maquette.service.ClasseService;
 import uasz.sn.Gestion_Enseignement.maquette.service.FormationService;
+import uasz.sn.Gestion_Enseignement.maquette.service.MaquetteService;
+
 import java.security.Principal;
 import java.util.List;
 
@@ -17,7 +19,7 @@ import java.util.List;
 @AllArgsConstructor
 public class FormationController {
     private FormationService formationService;
-    private ClasseService classeService;
+    private MaquetteService maquetteService;
     private UtilisateurService utilisateurService;
 
     @GetMapping("/ChefDepartement/Formation")
@@ -45,5 +47,10 @@ public class FormationController {
         public String Archif_Formation(Long id ) {
             formationService.ArchiverFormation(id);
             return "redirect:/ChefDepartement/Formation";
+    }
+    @PostMapping("/ChefDepartement/ActiverFormation")
+    public String Activer_Formation(Long id ) {
+        formationService.ActiverFormation(id);
+        return "redirect:/ChefDepartement/Formation";
     }
 }

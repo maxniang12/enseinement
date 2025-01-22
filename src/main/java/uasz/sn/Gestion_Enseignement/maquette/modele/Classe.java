@@ -13,7 +13,6 @@ public class Classe {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private  long id ;
-    @Column(unique=true)
     private String  nomClasse;
     private boolean archive=false;
     @ManyToOne

@@ -21,4 +21,6 @@ public class UE {
     private int credit;
     @OneToMany
     private List<EC> EC;
+    @ManyToMany
+    private List<Maquette> maquettes;
 }

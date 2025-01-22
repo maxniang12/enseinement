@@ -26,9 +26,27 @@
                     <li>
                         <a><span>Emploi du Temps</span></a>
                     </li>
-                    <li>
-                        <a><span>Syllabus</span></a>
+
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            <span> Syllabus</span><span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu" style="background-color: #353333">
+                            <li>
+                                <a th:href="@{/ChefDepartement/UE}" style="color: #14d123"><span>UE</span></a>
+                            </li>
+                            <li>
+                                <a th:href="@{/ChefDepartement/ECTout}" style="color: #14d123"><span>EC</span></a>
+                            </li>
+                            <li><a style="color: #14d123"><span></span></a>
+                            </li>
+                        </ul>
                     </li>
+                    <!-- <li>
+
+                      <a><span>Syllabus</span></a>
+                    </li>-->
+
                     <li>
                         <a><span>Repartition</span></a>
                     </li>
@@ -37,14 +55,11 @@
                     </li>
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                            <span> Maquettes</span><span class="caret"></span>
+                            <span> Formations</span><span class="caret"></span>
                         </a>
                         <ul class="dropdown-menu" style="background-color: #353333">
                             <li>
-                                <a th:href="@{/ChefDepartement/UE}" style="color: #14d123"><span>UE</span></a>
-                            </li>
-                            <li>
-                                <a th:href="@{/ChefDepartement/Formation}" style="color: #14d123"><span>Formations</span></a>
+                                <a th:href="@{/ChefDepartement/Formation}" style="color: #14d123"><span>Formation</span></a>
                             </li>
                             <li><a style="color: #14d123"><span></span></a>
                             </li>
@@ -72,6 +87,15 @@
 </header>
 
 <div layout:fragment="custom-content" >
+
+    <div class="container">
+        <h3 class="text-center"  style="background-color: #8a6d3b"> MONSIEUR LE CHEF DU DEPARTEMENT :</h3>
+
+    </div>
+    
+    
+    
+    
 
 
 </div>

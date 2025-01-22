@@ -16,9 +16,10 @@ public class Maquette {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String nom;
-    @OneToMany
+    private String nomMaquette;
+    @ManyToMany
     private List<UE> UE;
-    @OneToOne
-   private Classe classe;
+    @ManyToOne
+    private Formation formation;
+
 }

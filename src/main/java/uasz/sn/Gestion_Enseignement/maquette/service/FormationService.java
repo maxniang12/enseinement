@@ -41,5 +41,17 @@ public class FormationService {
         formationRepository.save(formation);
     }
 
+    public void ActiverFormation (Long id){
+        Formation formation =formationRepository.findById(id).get();
+        if(formation.isActive()==true){
+
+            formation.setActive(false);
+        } else {
+            formation.setActive(true);
+        }
+
+        formationRepository.save(formation);
+    }
+
 
 }

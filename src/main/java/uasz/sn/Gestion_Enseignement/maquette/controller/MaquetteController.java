@@ -17,6 +17,7 @@ import uasz.sn.Gestion_Enseignement.maquette.repository.UERepository;
 import uasz.sn.Gestion_Enseignement.maquette.service.*;
 
 import java.security.Principal;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
@@ -33,9 +34,9 @@ private UERepository ueRepository;
 
 
 @GetMapping("/ChefDepartement/Maquette")
-    public String lister_Maquette(Model model, Principal principal, @RequestParam("id") Long id) {
+    public String lister_Maquette(Model model, Principal principal, @RequestParam("id") Long idformation) {
     Utilisateur use=utilisateurService.rechercher_Utilisateur(principal.getName());
-    Formation formation= formationService.rechercherFormation(id);
+    Formation formation= formationService.rechercherFormation(idformation);
 
     List<Maquette> listeMaquette=maquetteService.ListerMaquetteByFormation(formation.getId());
 
@@ -48,6 +49,7 @@ private UERepository ueRepository;
     model.addAttribute("prenom",use.getPrenom());
     model.addAttribute("listeMaquette",listeMaquette);
     model.addAttribute("formation",formation);
+    model.addAttribute("idformation",idformation);
     model.addAttribute("listeUE",listeUE);
     model.addAttribute("formationList",formationList);
     return "template_maquette";
@@ -56,13 +58,13 @@ private UERepository ueRepository;
 
 
 @PostMapping("/ChefDepartement/AjouterMaquette")
-    public String Ajouter_Maquette(@RequestParam("nomMaquette") String nomMaquette,@RequestParam("ueIds") List<Long> ueIds,@RequestParam("id") Long id
+    public String Ajouter_Maquette(@RequestParam("nomMaquette") String nomMaquette,@RequestParam("ueIds") List<Long> ueIds,@RequestParam("idformation") Long formationId
           ){
-    Formation formation=formationService.rechercherFormation(id);
-    List<UE> selectedUEs = ueRepository.findAllById(ueIds);
+    Formation formation=formationService.rechercherFormation(formationId);
     Maquette maquette=new Maquette();
     maquette.setNomMaquette(nomMaquette);
-    maquette.setUE(selectedUEs);
+        List<UE> selectedUEs = ueRepository.findAllById(ueIds);
+        maquette.setUE(selectedUEs);
     maquette.setFormation(formation);
     maquetteService.AjouterMaquette(maquette);
     return "redirect:/ChefDepartement/Maquette";

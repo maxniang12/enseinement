@@ -50,11 +50,13 @@ public class ECController {
 
         public String lister_ECTout(Model model , Principal principal) {
 
-            Utilisateur user=utilisateurService.rechercher_Utilisateur(principal.getName());
-            model.addAttribute("nom", user.getNom());
-            model.addAttribute("prenom", user.getPrenom());
+            Utilisateur user2=utilisateurService.rechercher_Utilisateur(principal.getName());
+            model.addAttribute("nom", user2.getNom());
+            model.addAttribute("prenom", user2.getPrenom());
             List<EC> listeECTOUt=ecService.listerToutEC();
+           List<UE>  listeUE=ueService.listerlUE();
             model.addAttribute("listeECTout",listeECTOUt);
+        model.addAttribute("listeUE", listeUE);
 
             return "template_ec";
 

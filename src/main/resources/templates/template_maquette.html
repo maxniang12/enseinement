@@ -41,6 +41,8 @@
                                         <label>Nom de la maquette</label>
                                         <input type="text" class="form-control" name="nomMaquette" />
 
+                                        <input type="hidden" name="idformation" th:value="${idformation}" />
+
                                         <label>Cocher des UE</label>
 
                                         <div  th:each="ue:${listeUE}">
@@ -73,17 +75,16 @@
                     <thead class="table-light">
                     <tr>
                         <th rowspan="2" class="text-center align-middle">UNITÉS D'ENSEIGNEMENT</th>
-                        <th>Crédits</th>
-                        <th>Coeff UE</th>
+                        <th rowspan="2">Crédits</th>
+                        <th rowspan="2">Coeff UE</th>
                         <th colspan="7" >ÉLÉMENTS CONSTITUTIFS</th>
-
                     </tr>
                     <tr>
                         <th>Intitulés</th>
                         <th>CM</th>
                         <th>TD</th>
                         <th>TP</th>
-                        <th>CM + TD/TP</th>
+                        <th>CM +TD+TP</th>
                         <th>TPE</th>
                         <th>Coeff.</th>
                     </tr>
@@ -96,19 +97,14 @@
                         <td th:text="${ue.code}+ '--'+ ${ue.libelle}" ></td>
                         <td class="text-center" th:text="${ue.credit}"></td>
                         <td class="text-center" th:text="${ue.coeff}"></td>
-                    </tr>
-
-                    <tr>
                         <td rowspan="2"></td>
+                        <td class="text-center"></td>
+                        <td class="text-center"></td>
+                        <td class="text-center"></td>
+                        <td class="text-center"></td>
+                        <td class="text-center"></td>
+                        <td class="text-center"></td>
                         <td></td>
-                        <td></td>
-                        <td></td>
-                        <td class="text-center"></td>
-                        <td class="text-center"></td>
-                        <td class="text-center"></td>
-                        <td class="text-center"></td>
-                        <td class="text-center"></td>
-                        <td class="text-center"></td>
                     </tr>
 
 

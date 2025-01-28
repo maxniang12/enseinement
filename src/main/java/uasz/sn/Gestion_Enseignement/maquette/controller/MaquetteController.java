@@ -33,41 +33,74 @@ private UERepository ueRepository;
 
 
 
-@GetMapping("/ChefDepartement/Maquette")
+//@GetMapping("/ChefDepartement/Maquette")
+//    public String lister_Maquette(Model model, Principal principal, @RequestParam("id") Long idformation) {
+//    Utilisateur use=utilisateurService.rechercher_Utilisateur(principal.getName());
+//    Formation formation= formationService.rechercherFormation(idformation);
+//
+//    List<Maquette> listeMaquette=maquetteService.ListerMaquetteByFormation(formation.getId());
+//
+//    List<Formation> formationList=formationService.ListerFormations();
+//
+//    List<UE> listeUE=ueService.listerlUE();
+//
+//
+//    model.addAttribute("nom",use.getNom());
+//    model.addAttribute("prenom",use.getPrenom());
+//    model.addAttribute("listeMaquette",listeMaquette);
+//    model.addAttribute("formation",formation);
+//    model.addAttribute("idformation",idformation);
+//    model.addAttribute("listeUE",listeUE);
+//    model.addAttribute("formationList",formationList);
+//    return "template_maquette";
+//
+//}
+
+    @GetMapping("/ChefDepartement/Maquette")
     public String lister_Maquette(Model model, Principal principal, @RequestParam("id") Long idformation) {
-    Utilisateur use=utilisateurService.rechercher_Utilisateur(principal.getName());
-    Formation formation= formationService.rechercherFormation(idformation);
+        Utilisateur use = utilisateurService.rechercher_Utilisateur(principal.getName());
+        Formation formation = formationService.rechercherFormation(idformation);
+        List<Maquette> listeMaquette = maquetteService.ListerMaquetteByFormation(formation.getId());
+        List<Formation> formationList = formationService.ListerFormations();
+        List<UE> listeUE = ueService.listerlUE();
 
-    List<Maquette> listeMaquette=maquetteService.ListerMaquetteByFormation(formation.getId());
+        // Ajouter les données au modèle
+        model.addAttribute("nom", use.getNom());
+        model.addAttribute("prenom", use.getPrenom());
+        model.addAttribute("listeMaquette", listeMaquette);
+        model.addAttribute("formation", formation);
+        model.addAttribute("idformation", idformation);
+        model.addAttribute("listeUE", listeUE);
+        model.addAttribute("formationList", formationList);
 
-    List<Formation> formationList=formationService.ListerFormations();
+        // Ajouter un exemple de maquette si nécessaire
+        if (!listeMaquette.isEmpty()) {
+            model.addAttribute("maquette", listeMaquette.get(0)); // Exemple avec la première maquette
+        } else {
+            model.addAttribute("maquette", null); // Evite une erreur si aucune maquette
+        }
 
-    List<UE> listeUE=ueService.listerlUE();
-
-
-    model.addAttribute("nom",use.getNom());
-    model.addAttribute("prenom",use.getPrenom());
-    model.addAttribute("listeMaquette",listeMaquette);
-    model.addAttribute("formation",formation);
-    model.addAttribute("idformation",idformation);
-    model.addAttribute("listeUE",listeUE);
-    model.addAttribute("formationList",formationList);
-    return "template_maquette";
-
-}
+        return "template_maquette";
+    }
 
 
-@PostMapping("/ChefDepartement/AjouterMaquette")
-    public String Ajouter_Maquette(@RequestParam("nomMaquette") String nomMaquette,@RequestParam("ueIds") List<Long> ueIds,@RequestParam("idformation") Long formationId
+
+    @PostMapping("/ChefDepartement/AjouterMaquette")
+    public String Ajouter_Maquette( Model model,@RequestParam("nomMaquette") String nomMaquette,@RequestParam("ueIds") List<Long> ueIds,@RequestParam("idf") Long formationId
           ){
-    Formation formation=formationService.rechercherFormation(formationId);
-    Maquette maquette=new Maquette();
-    maquette.setNomMaquette(nomMaquette);
+        Formation formation=formationService.rechercherFormation(formationId);
+        Maquette maquette=new Maquette();
+        maquette.setNomMaquette(nomMaquette);
         List<UE> selectedUEs = ueRepository.findAllById(ueIds);
         maquette.setUE(selectedUEs);
-    maquette.setFormation(formation);
-    maquetteService.AjouterMaquette(maquette);
-    return "redirect:/ChefDepartement/Maquette";
+       maquette.setFormation(formation);
+       maquetteService.AjouterMaquette(maquette,ueIds);
+    model.addAttribute("maquette", maquette);
+    model.addAttribute("selectedUEs", selectedUEs);
+    model.addAttribute("Maquette", maquetteService.ListerMaquetteByFormation(formation.getId()));
+
+
+    return "template_maquette";
 
 }
 

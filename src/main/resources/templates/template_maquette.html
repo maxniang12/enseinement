@@ -41,7 +41,8 @@
                                         <label>Nom de la maquette</label>
                                         <input type="text" class="form-control" name="nomMaquette" />
 
-                                        <input type="hidden" name="idformation" th:value="${idformation}" />
+                                        <input type="hidden" name="idf" th:value="${formation.id}" />
+
 
                                         <label>Cocher des UE</label>
 
@@ -71,6 +72,7 @@
             </div>
 
             <div class="table-responsive">
+                <h3 class="text-center"  style="color: #0d6efd"><span th:text="${Maquette}" ></span></h3>
                 <table class="table table-bordered table-striped" id="table_Maquette">
                     <thead class="table-light">
                     <tr>
@@ -89,28 +91,44 @@
                         <th>Coeff.</th>
                     </tr>
 
-
-
                     </thead>
                     <tbody>
-                    <tr th:each="ue:${listeUE}">
-                        <td th:text="${ue.code}+ '--'+ ${ue.libelle}" ></td>
+                    <tr th:each="ue:${selectedUEs}">
+                        <td th:text=" ${ue.code}'--'+${ue.libelle} " ></td>
                         <td class="text-center" th:text="${ue.credit}"></td>
                         <td class="text-center" th:text="${ue.coeff}"></td>
-                        <td rowspan="2"></td>
-                        <td class="text-center"></td>
-                        <td class="text-center"></td>
-                        <td class="text-center"></td>
-                        <td class="text-center"></td>
-                        <td class="text-center"></td>
-                        <td class="text-center"></td>
-                        <td></td>
+                        <td colspan="7">
+                            <table class="table table-bordered">
+                                <thead>
+                                <tr>
+                                    <th>Intitulé EC</th>
+                                    <th>CM</th>
+                                    <th>TD</th>
+                                    <th>TP</th>
+                                    <th>CM + TD + TP</th>
+                                    <th>Coeff</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr th:each="ec : ${ue.EC}">
+                                    <td th:text="${ec.libelle}"></td>
+                                    <td th:text="${ec.cm}"></td>
+                                    <td th:text="${ec.td}"></td>
+                                    <td th:text="${ec.tp}"></td>
+                                    <td th:text="${ec.cm + ec.td + ec.tp}"></td>
+                                    <td th:text="${ec.coeff}"></td>
+                                </tr>
+                                <tr th:if="${#lists.isEmpty(ue.EC)}">
+                                    <td colspan="6" class="text-center">Aucun EC associé</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </td>
                     </tr>
 
 
                     </tbody>
 
-                    </table>
 
 
 

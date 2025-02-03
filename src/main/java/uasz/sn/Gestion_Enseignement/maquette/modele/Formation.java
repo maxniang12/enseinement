@@ -16,12 +16,12 @@ public class Formation {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private  long id ;
     private String nomFormation;
-    private  String niveauFormation;
+    private  String description;
     private Boolean archive=false;
     @Column(nullable = false, columnDefinition = "BOOLEAN DEFAULT TRUE")
     private Boolean active=true;
     @OneToMany
-    private List<Maquette> maquettes;
+    private List<Classe> classes;
 
     public  Boolean isArchive(){
         return archive;

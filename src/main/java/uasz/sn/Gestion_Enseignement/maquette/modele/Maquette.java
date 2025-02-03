@@ -19,7 +19,7 @@ public class Maquette {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String nomMaquette;
+    private String semestre;
     @ManyToMany
     private List<UE> UE;
     @ManyToOne
@@ -41,12 +41,12 @@ public class Maquette {
         this.UE = UE;
     }
 
-    public String getNomMaquette() {
-        return nomMaquette;
+    public String getSemestre() {
+        return semestre ;
     }
 
-    public void setNomMaquette(String nomMaquette) {
-        this.nomMaquette = nomMaquette;
+    public void setSemestre(String nomMaquette) {
+        this.semestre = semestre;
     }
 
     public Long getId() {

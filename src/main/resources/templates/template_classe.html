@@ -27,19 +27,12 @@
                             <h4 class="modal-title" style="text-align: center">Ajouter un EC</h4>
                         </div>
                         <!--modal Body-->
-                        <form th:action="@{/ChefDepartement/AjouterClasse}" method="post">
+                        <form th:action="@{/ChefDepartement/AjouterClasse/{id}(id=${formation.id})}" method="post">
                             <div class="modal-body" >
                                 <div class="form-group">
 
                                     <label >Nom</label>
                                     <input type="text" class="form-control" name="nomClasse" />
-
-
-                                    <select name="id" class="form-control" required>
-                                        <option value="">selction formation</option>
-                                        <option th:each="formation: ${formationList}" th:value="${formation.id}" th:text="${formation.nomFormation}"></option>
-                                    </select>
-
 
 
                                 </div>
@@ -100,7 +93,7 @@
                                         <h4 class="modal-title" style="text-align: center">Modifier La Classe</h4>
                                     </div>
                                     <!--modal Body-->
-                                    <form th:action="@{/ChefDepartement/ModifierClasse}" method="post">
+                                    <form th:action="@{/ChefDepartement/ModifierClasse/{id}(id=${formation.id})}" method="post">
                                         <div class="modal-body" >
                                             <div style="display: none">
                                                 <input name="id" th:value="${cl.id}" />
@@ -109,6 +102,12 @@
                                             <div class="form-group">
                                                 <label >Nom Formation</label>
                                                 <input type="text" class="form-control" name="nomClasse" th:value="${cl.nomClasse}"/>
+                                            </div>
+
+
+                                            <div class="form-group">
+                                                <label >Niveau</label>
+                                                <input type="text" class="form-control" name="niveau" th:value="${cl.niveau}"/>
                                             </div>
 
                                         </div>
@@ -143,13 +142,9 @@
                                         <h4 class="modal-title" style="text-align: center">Archiver Classe</h4>
                                     </div>
                                     <!--modal Body-->
-                                    <form th:action="@{/ChefDepartement/ArchifClasse}" method="post">
+                                    <form th:action="@{/ChefDepartement/ArchifClasse/{id}/{clId}(id=${formation.id}, clId=${cl.id})}" method="post">
                                         <div class="modal-body" >
-                                            <!-- ID de la formation (pour la redirection après suppression -->
-                                            <input type="hidden" name="id" th:value="${formation.id}" />
 
-                                            <!-- ID de la Classe à supprimer -->
-                                            <input type="hidden" name="clId" th:value="${cl.id}" />
 
                                             <div class="form-group">
                                                 <label >Nom de la classe</label> :

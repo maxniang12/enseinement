@@ -21,9 +21,9 @@ public class Maquette {
     private String nomMaquette;
     private String semestre;
     @ManyToMany
-    private List<UE> UE = new ArrayList<UE>();
+    private List<UE> UE = new ArrayList<>();
     @ManyToOne
-    private Formation formation;
+    private Classe classe;
 
 
 

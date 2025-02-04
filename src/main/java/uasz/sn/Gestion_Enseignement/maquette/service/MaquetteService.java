@@ -72,8 +72,11 @@ public class MaquetteService {
 //
 //    }
 
+//    public List<Maquette> ListerMaquetteByClasse(Long idc) {
+//
+//       return maquetteRepository.findClasseById(idc);
+//    }
     public List<Maquette> ListerMaquetteByClasse(Long idc) {
-
-       return maquetteRepository.findClasseById(idc);
+        return maquetteRepository.findMaquettesWithUEsByClasseId(idc); // Utilisation de la nouvelle méthode
     }
 }

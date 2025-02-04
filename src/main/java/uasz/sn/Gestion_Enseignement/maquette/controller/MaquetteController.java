@@ -45,18 +45,27 @@ private ClasseService classeService;
     model.addAttribute("maquettes",maquettes);
     List<UE> listUes=ueService.listerlUE();
     model.addAttribute("listUes",listUes);
+
+    // Charger les UEs associées à chaque maquette
+    for (Maquette maquette : maquettes) {
+        // Force l'initialisation des UEs
+        maquette.getUE().size();
+    }
+
+
     return "template_maquette1";
 
 }
 @PostMapping("/ChefDepartement/AjoutMaquette/{id}")
-    public String Ajouter_Maquette(Model model, Principal principal,@PathVariable("id") Long idc,@RequestParam("nomMaquette")String nomMaquette,@RequestParam("semestre") String semestre,@RequestParam("ueids") List<Long> ueids) {
+    public String Ajouter_Maquette(Model model, Principal principal,@PathVariable("id") Long idc,@RequestParam("nomMaquette")String nomMaquette,@RequestParam("semestre") String semestre,@RequestParam("ueIds") List<Long> ueids) {
       Classe classe=classeService.recherClasse(idc);
       Maquette maquette=new Maquette();
       maquette.setNomMaquette(nomMaquette);
       maquette.setSemestre(semestre);
+      maquette.setClasse(classe);
       maquetteService.AjouterMaquette(maquette,ueids);
 
-      return "redirect:/ChefDepartement/Maquette/"+idc;
+      return "redirect:/ChefDepartement/Maquette/{id}";
 
     }
 

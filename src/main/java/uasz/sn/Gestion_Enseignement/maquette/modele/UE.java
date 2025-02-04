@@ -26,5 +26,5 @@ public class UE {
     @OneToMany
     private List<EC> EC;
     @ManyToMany
-    private List<Maquette> maquettes;
+    private List<Maquette> maquettes =new ArrayList<>();
 }

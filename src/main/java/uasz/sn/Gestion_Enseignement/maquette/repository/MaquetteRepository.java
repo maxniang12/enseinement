@@ -7,5 +7,6 @@ import java.util.List;
 
 public interface MaquetteRepository extends JpaRepository<Maquette, Long> {
 
-    List<Maquette> findFormationById(Long Idf);
+    List<Maquette> findClasseById(Long Idc);
+
 }

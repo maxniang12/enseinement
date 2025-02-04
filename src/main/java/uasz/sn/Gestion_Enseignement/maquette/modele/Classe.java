@@ -3,6 +3,7 @@ package uasz.sn.Gestion_Enseignement.maquette.modele;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Data
@@ -20,7 +21,7 @@ public class Classe {
     private Formation formation;
 
     @OneToMany
-    private List<Maquette> maquettes;
+    private List<Maquette> maquettes=new ArrayList<>();
 
     public  Boolean isArchive(){
         return archive;

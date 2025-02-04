@@ -24,17 +24,18 @@
                         <!--modal Header-->
                         <div class="modal-header panel-heading" >
                             <button type="button" class="close" data-dismiss="modal">x</button>
-                            <h4 class="modal-title" style="text-align: center">Ajouter un EC</h4>
+                            <h4 class="modal-title" style="text-align: center">Ajouter une Classe</h4>
                         </div>
                         <!--modal Body-->
                         <form th:action="@{/ChefDepartement/AjouterClasse/{id}(id=${formation.id})}" method="post">
                             <div class="modal-body" >
                                 <div class="form-group">
-
                                     <label >Nom</label>
                                     <input type="text" class="form-control" name="nomClasse" />
-
-
+                                </div>
+                                <div class="form-group">
+                                    <label >Niveau</label>
+                                    <input type="text" class="form-control" name="niveau" />
                                 </div>
 
                             </div>
@@ -60,12 +61,14 @@
                 <thead>
                 <tr>
                     <th>NOM</th>
-                    <th style="text-align:center" colspan="2">actions</th>
+                    <th>Niveau de La Classe</th>
+                    <th style="text-align:center" colspan="3">actions</th>
                 </tr>
                 </thead>
                 <tbody>
                 <tr th:each="cl:${listeClasse}">
                     <td th:text="${cl.nomClasse}"></td>
+                    <td th:text="${cl.niveau}"></td>
                     <td>
                         <button class="btn btn-info btn-sm" data-title="Edit" data-toggle="modal" th:attr="data-target='#form_Modifier_Classe'+${cl.id}">
                             Modifier
@@ -78,8 +81,8 @@
                         </button>
                     </td>
                     <td>
-                        <a class="btn btn-info btn-sm" th:href="@{/ChefDepartement/Maquette(id=${cl.id})}" >
-                            voir maquette
+                        <a class="btn btn-info btn-sm" th:href="@{/ChefDepartement/Maquette{id}(id=${cl.id})}">
+                            voir details
                         </a>
                     </td>
 
@@ -150,6 +153,10 @@
                                                 <label >Nom de la classe</label> :
                                                 <span th:text="${cl.nomClasse}"/> </span>
                                             </div>
+                                            <div class="form-group">
+                                                <label >niveau de la classe</label> :
+                                                <span th:text="${cl.niveau}"/> </span>
+                                            </div>
 
                                         </div>
                                         <!--modal Footer-->
@@ -173,17 +180,15 @@
                                         <h4 class="modal-title" style="text-align: center">Desarchiver Classe</h4>
                                     </div>
                                     <!--modal Body-->
-                                    <form th:action="@{/ChefDepartement/ArchifClasse}" method="post">
+                                    <form th:action="@{/ChefDepartement/ArchifClasse/{id}/{clId}(id=${formation.id}, clId=${cl.id})}" method="post">
                                         <div class="modal-body" >
-                                            <!-- ID de la formation (pour la redirection après suppression -->
-                                            <input type="hidden" name="id" th:value="${formation.id}" />
-
-                                            <!-- ID de la Classe à supprimer -->
-                                            <input type="hidden" name="clId" th:value="${cl.id}" />
-
                                             <div class="form-group">
                                                 <label >Nom de la classe</label> :
                                                 <span th:text="${cl.nomClasse}"/> </span>
+                                            </div>
+                                            <div class="form-group">
+                                                <label >niveau de la classe</label> :
+                                                <span th:text="${cl.niveau}"/> </span>
                                             </div>
                                         </div>
                                         <!--modal Footer-->

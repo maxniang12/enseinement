@@ -41,7 +41,7 @@ public class ClasseService {
     }
 
     public List<Classe> listeDesClassDeFormation(Long fid){
-        return classeRepository.findByFormation(fid);
+        return classeRepository.findByFormationId(fid);
     }
 
 

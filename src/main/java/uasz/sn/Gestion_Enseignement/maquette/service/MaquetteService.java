@@ -23,7 +23,7 @@ public class MaquetteService {
     }
 
 
-    public void AjouterMaquette (Maquette maquette, List<Long> ueIds) {
+    public void AjouterMaquette(Maquette maquette, List<Long> ueIds) {
         // Récupérer les UEs par leurs IDs
         List<UE> ues = ueRepository.findAllById(ueIds);
         maquette.setUE(ues);
@@ -72,8 +72,8 @@ public class MaquetteService {
 //
 //    }
 
-    public List<Maquette> ListerMaquetteByFormation(Long idf) {
+    public List<Maquette> ListerMaquetteByClasse(Long idc) {
 
-       return maquetteRepository.findFormationById(idf);
+       return maquetteRepository.findClasseById(idc);
     }
 }

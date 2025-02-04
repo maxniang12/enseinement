@@ -47,7 +47,7 @@ public class ClasseController {
     classe.setNiveau(niveau);
     classe.setFormation(formation);
     classeService.AjouterClasse(classe);
-    return "redirect:/ChefDepartement/Classe?id="+fId;
+    return "redirect:/ChefDepartement/Classe/{id}";
 
 }
 

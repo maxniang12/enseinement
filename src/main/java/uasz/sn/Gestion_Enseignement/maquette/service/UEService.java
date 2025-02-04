@@ -30,10 +30,7 @@ public class UEService {
     public void supprimerUe(Long id) {
         ueRepository.deleteById(id);
     }
-    public  UE chercherUEAvecCode(String code) {
 
-        return ueRepository.findUEByCode(code);
-    }
 
 
 

@@ -52,7 +52,16 @@ public class MaquetteService {
 
     public Maquette RechercherMaquette(Long id) {
 
-        return maquetteRepository.findMaquetteWithUEAndEC(id);
+        Maquette maquette = maquetteRepository.findMaquetteWithUE(id);
+
+        List<UE> ues = maquette.getUE();
+        if (ues != null && !ues.isEmpty()) {
+            List<UE> uesWithEC = maquetteRepository.findUEWithEC(ues);
+            maquette.setUE(uesWithEC); // Met à jour les UE avec leurs EC
+        }
+
+        return maquette;
+    }
 
 //        // Charger les UEs avec leurs ECs sans modifier directement l'objet dans la boucle
 //        List<UE> ueList = new ArrayList<>();
@@ -64,7 +73,7 @@ public class MaquetteService {
 //        return maquette;
 
 
-    }
+
 
     public Maquette ModifierMaquette(Maquette maquette) {
         return maquetteRepository.save(maquette);

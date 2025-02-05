@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.*;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.BatchSize;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,6 +22,7 @@ public class Maquette {
     private String nomMaquette;
     private String semestre;
     @ManyToMany
+    @BatchSize(size = 10) // Charge les UE par lots de 10
     private List<UE> UE = new ArrayList<>();
     @ManyToOne
     private Classe classe;

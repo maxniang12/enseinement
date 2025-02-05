@@ -45,7 +45,7 @@ private ClasseService classeService;
     model.addAttribute("maquettes",maquettes);
     List<UE> listUes = ueService.listerlUE();
     for (UE ue : listUes) {
-        ue.getEc().size();  // ✅ Force Hibernate à charger les ECs avant d'envoyer à Thymeleaf
+        ue.getEC().size();  // ✅ Force Hibernate à charger les ECs avant d'envoyer à Thymeleaf
     }
     model.addAttribute("listUes",listUes);
 

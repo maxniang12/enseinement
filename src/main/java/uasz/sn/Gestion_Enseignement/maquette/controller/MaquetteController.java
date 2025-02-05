@@ -69,4 +69,16 @@ private ClasseService classeService;
 
     }
 
+    @GetMapping("/ChefDepartement/Maquette/{id}/details")
+    public String afficherDetailsMaquette(@PathVariable("id") Long id, Model model, Principal principal) {
+        Utilisateur utilisateur = utilisateurService.rechercher_Utilisateur(principal.getName());
+        model.addAttribute("nom", utilisateur.getNom());
+        model.addAttribute("prenom", utilisateur.getPrenom());
+
+        Maquette maquette = maquetteService.RechercherMaquette(id);
+        model.addAttribute("maquette", maquette);
+
+        return "details_maquette";
+    }
+
 }

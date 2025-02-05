@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="template_chefDepartement">
+<head>
+    <meta charset="UTF-8">
+    <title>detail_maquettes</title>
+</head>
+<body>
+<div layout:fragment="custom-content">
+    <div class="container mt-4">
+
+        <h2 class="text-center" th:text="'Détails de la Maquette - ' + ${maquette.nomMaquette}"></h2>
+        <h4 class="text-center" th:text="'Semestre: ' + ${maquette.semestre}"></h4>
+
+    </div>
+
+
+</div>
+
+</body>
+</html>

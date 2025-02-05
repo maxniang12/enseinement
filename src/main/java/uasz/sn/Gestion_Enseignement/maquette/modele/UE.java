@@ -23,8 +23,8 @@ public class UE {
     private int credit;
 
 
-    @OneToMany
-    private List<EC> EC = new ArrayList<>();
+    @OneToMany(mappedBy = "ue", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    private List<EC> ec = new ArrayList<>();
     @ManyToMany
     private List<Maquette> maquettes =new ArrayList<>();
 }

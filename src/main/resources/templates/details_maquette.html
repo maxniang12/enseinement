@@ -12,6 +12,76 @@
         <h2 class="text-center" th:text="'Détails de la Maquette - ' + ${maquette.nomMaquette}"></h2>
         <h4 class="text-center" th:text="'Semestre: ' + ${maquette.semestre}"></h4>
 
+        <div class="table-responsive">
+            <table class="table table-bordered table-striped" id="table_MaquettDet">
+                <thead>
+                <tr>
+                    <th>UE</th>
+                    <th>Crédits</th>
+                    <th>Coef</th>
+                    <th>Intitulé</th>
+                    <th>CM</th>
+                    <th>TD</th>
+                    <th>TP</th>
+                    <th>CM+TD/TP</th>
+                    <th>TPE</th>
+                    <th>VH Total</th>
+                    <th>Coef</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="ue : ${maquette.UE}" th:if="${ue != null}">
+                    <td rowspan="${ue.ec != null and #lists.size(ue.ec) > 0 ? #lists.size(ue.ec) : 1}" th:text="${ue.libelle}"></td>
+                    <td rowspan="${ue.ec != null and #lists.size(ue.ec) > 0 ? #lists.size(ue.ec) : 1}" th:text="${ue.credit}"></td>
+                    <td rowspan="${ue.ec != null and #lists.size(ue.ec) > 0 ? #lists.size(ue.ec) : 1}" th:text="${ue.coeff}"></td>
+
+                    <!-- Vérifier si l'UE a des EC -->
+                    <th:block th:if="${ue.ec != null and not #lists.isEmpty(ue.ec)}">
+                        <td th:text="${ue.ec[0].libelle}"></td>
+                        <td th:text="${ue.ec[0].cm}"></td>
+                        <td th:text="${ue.ec[0].td}"></td>
+                        <td th:text="${ue.ec[0].tp}"></td>
+                        <td th:text="${ue.ec[0].cm + ue.ec[0].td + ue.ec[0].tp}"></td>
+                        <td th:text="${ue.ec[0].tpe}"></td>
+                        <td th:text="${ue.ec[0].cm + ue.ec[0].td + ue.ec[0].tp + ue.ec[0].tpe}"></td>
+                        <td th:text="${ue.ec[0].coeff}"></td>
+                    </th:block>
+
+                    <!-- Si l'UE n'a pas d'EC, on affiche une ligne vide avec un message -->
+                    <th:block th:if="${ue.ec == null or #lists.isEmpty(ue.ec)}">
+                        <td colspan="8" class="text-center">Aucun EC</td>
+                    </th:block>
+                </tr>
+
+                <!-- Affichage des autres EC -->
+                <tr th:each="ec, iterStat : ${ue.ec}" th:if="${ue.ec != null and iterStat.index > 1}">
+                    <td th:text="${ue.ec[1].libelle}"></td>
+                    <td th:text="${ue.ec[1].cm}"></td>
+                    <td th:text="${ue.ec[1].td}"></td>
+                    <td th:text="${ue.ec[1].tp}"></td>
+                    <td th:text="${ue.ec[1].cm + ue.ec[1].td + ue.ec[1].tp}"></td>
+                    <td th:text="${ue.ec[1].tpe}"></td>
+                    <td th:text="${ue.ec[1].cm + ue.ec[1].td + ue.ec[1].tp + ue.ec[1].tpe}"></td>
+                    <td th:text="${ue.ec[1].coeff}"></td>
+                </tr>
+                </tbody>
+
+
+
+
+
+
+
+            </table>
+        </div>
+
+        <script>
+            $(document).ready(function() {
+                $("#table_MaquettDet").DataTable({
+
+                });
+            })
+        </script>
     </div>
 
 

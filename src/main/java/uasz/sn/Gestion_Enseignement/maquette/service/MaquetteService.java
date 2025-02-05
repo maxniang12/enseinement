@@ -8,6 +8,7 @@ import uasz.sn.Gestion_Enseignement.maquette.modele.UE;
 import uasz.sn.Gestion_Enseignement.maquette.repository.MaquetteRepository;
 import uasz.sn.Gestion_Enseignement.maquette.repository.UERepository;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -50,7 +51,18 @@ public class MaquetteService {
 
 
     public Maquette RechercherMaquette(Long id) {
-        return  maquetteRepository.findById(id).get();
+
+        return maquetteRepository.findMaquetteWithUEAndEC(id);
+
+//        // Charger les UEs avec leurs ECs sans modifier directement l'objet dans la boucle
+//        List<UE> ueList = new ArrayList<>();
+//        for (UE ue : maquette.getUE()) {
+//            ueList.add(ueRepository.findUEWithECsById(ue.getId()));  // Charger chaque UE avec ses ECs
+//        }
+//        maquette.setUE(ueList);  // Mettre à jour la liste des UEs dans la maquette
+//
+//        return maquette;
+
 
     }
 

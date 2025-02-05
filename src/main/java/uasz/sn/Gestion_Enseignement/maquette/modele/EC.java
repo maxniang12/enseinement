@@ -24,6 +24,7 @@ public class EC {
     private int td;
     private int tpe;
     @ManyToOne
+    @JoinColumn(name = "ue_id", nullable = false)
     private UE ue;
 }
 

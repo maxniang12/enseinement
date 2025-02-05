@@ -18,14 +18,13 @@ public class UEService {
         return ueRepository.save(ue);
     }
     public UE rechercherUE(long idUe) {
-
         return ueRepository.findById(idUe).get();
     }
     public UE modifierUE(UE ue) {
         return ueRepository.save(ue);
     }
     public List<UE> listerlUE() {
-        return ueRepository.findAll();
+        return ueRepository.findAllWithECs();
     }
     public void supprimerUe(Long id) {
         ueRepository.deleteById(id);

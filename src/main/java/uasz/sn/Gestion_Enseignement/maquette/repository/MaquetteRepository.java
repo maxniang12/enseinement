@@ -12,8 +12,8 @@ public interface MaquetteRepository extends JpaRepository<Maquette, Long> {
 
 //    List<Maquette> findClasseById(Long Idc);
 
-    @Query("SELECT m FROM Maquette m JOIN FETCH m.UE WHERE m.classe.id = :classeId")
-    List<Maquette> findMaquettesWithUEsByClasseId(@Param("classeId") Long classeId);
+
+    List<Maquette> findMaquettesWithUEsByClasseId(Long classeId);
 
 
 //    @Query("SELECT m FROM Maquette m JOIN FETCH m.UE ue JOIN FETCH ue.EC WHERE m.id = :id")

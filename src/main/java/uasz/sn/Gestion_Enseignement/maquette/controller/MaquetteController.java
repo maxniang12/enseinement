@@ -45,14 +45,14 @@ private ClasseService classeService;
     model.addAttribute("maquettes",maquettes);
     List<UE> listUes = ueService.listerlUE();
     for (UE ue : listUes) {
-        ue.getEC().size();
+        ue.getEcs().size();
     }
     model.addAttribute("listUes",listUes);
 
     // Charger les UEs associées à chaque maquette
     for (Maquette maquette : maquettes) {
         // Force l'initialisation des UEs
-        maquette.getUE().size();
+        maquette.getUes().size();
     }
 
 

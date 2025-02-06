@@ -27,7 +27,7 @@ public class MaquetteService {
     public void AjouterMaquette(Maquette maquette, List<Long> ueIds) {
         // Récupérer les UEs par leurs IDs
         List<UE> ues = ueRepository.findAllById(ueIds);
-        maquette.setUE(ues);
+        maquette.setUes(ues);
         maquetteRepository.save(maquette);
     }
 

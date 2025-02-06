@@ -14,28 +14,92 @@
 
         <div class="table-responsive">
             <table class="table table-bordered table-striped" id="table_MaquettDet">
-                <thead style="background-color: #083347;color: #ffffff">
+<!--                <thead style="background-color: #083347;color: #ffffff">-->
+<!--                <tr>-->
+<!--                <tr>-->
+<!--                    <th>Unite D'Enseignement</th>-->
+<!--                    <th>Crédits</th>-->
+<!--                    <th>Coef</th>-->
+<!--                    <th>Intitulé</th>-->
+<!--                    <th>CM</th>-->
+<!--                    <th>TD</th>-->
+<!--                    <th>TP</th>-->
+<!--                    <th>CM+TD/TP</th>-->
+<!--                    <th>TPE</th>-->
+<!--                    <th>VH Total</th>-->
+<!--                    <th>Coef</th>-->
+<!--                </tr>-->
+<!--                </tr>-->
+<!--                </thead>-->
+<!--                <tbody>-->
+<!--                <tr th:each="ue : ${maquette.UE}" th:if="${ue != null}">-->
+<!--                    &lt;!&ndash; Informations de l'UE &ndash;&gt;-->
+<!--                    <td rowspan="${ue.EC != null and #lists.size(ue.EC) > 0 ? #lists.size(ue.EC) : 1}" th:text="${ue.libelle}"></td>-->
+<!--                    <td rowspan="${ue.EC != null and #lists.size(ue.EC) > 0 ? #lists.size(ue.EC) : 1}" th:text="${ue.credit}"></td>-->
+<!--                    <td rowspan="${ue.EC != null and #lists.size(ue.EC) > 0 ? #lists.size(ue.EC) : 1}" th:text="${ue.coeff}"></td>-->
+<!--                    <th:block th:each="ec: ${ue.EC}">-->
+<!--                        <td></td>-->
+<!--                    </th:block>-->
+<!--                </tr>-->
+
+
+
+<!--                </tbody>-->
+
+                <thead class="table-light">
                 <tr>
-                    <th>Unite D'Enseignement</th>
-                    <th>Crédits</th>
-                    <th>Coef</th>
-                    <th>Intitulé</th>
-                    <th>CM</th>
-                    <th>TD</th>
-                    <th>TP</th>
-                    <th>CM+TD/TP</th>
-                    <th>TPE</th>
-                    <th>VH Total</th>
-                    <th>Coef</th>
+                    <th rowspan="2" class="text-center align-middle">UNITÉS D'ENSEIGNEMENT</th>
+                    <th rowspan="2">Crédits</th>
+                    <th rowspan="2">Coeff UE</th>
+                    <th colspan="7" >ÉLÉMENTS CONSTITUTIFS</th>
                 </tr>
+                <tr>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                </tr>
+
                 </thead>
                 <tbody>
-                <tr th:each="ue : ${maquette.UE}" th:if="${ue != null}">
-                    <td  th:text="${ue.code+'--'+ue.libelle}"></td>
-                    <td  th:text="${ue.credit}"></td>
-                    <td  th:text="${ue.coeff}"></td>
+                <tr th:each="ue:${maquette.ues}">
+                    <td th:text=" ${ue.code}+'--'+${ue.libelle} "></td>
+                    <td class="text-center" th:text="${ue.credit}"></td>
+                    <td class="text-center" th:text="${ue.coeff}"></td>
+                    <td colspan="7">
+                        <table class="table table-bordered">
+                            <thead>
+                            <tr>
+                                <th>Intitulés</th>
+                                <th>CM</th>
+                                <th>TD</th>
+                                <th>TP</th>
+                                <th>CM +TD+TP</th>
+                                <th>TPE</th>
+                                <th>Coeff.</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr th:each="ec : ${ue.ecs}">
+                                <td th:text="${ec.libelle}"></td>
+                                <td th:text="${ec.cm}"></td>
+                                <td th:text="${ec.td}"></td>
+                                <td th:text="${ec.tp}"></td>
+                                <td th:text="${ec.cm + ec.td + ec.tp}"></td>
+                                <td th:text="${ec.tpe}"></td>
+                                <td th:text="${ec.coeff}"></td>
+                            </tr>
+                            <tr th:if="${#lists.isEmpty(ue.ecs)}">
+                                <td colspan="7" class="text-center">Aucun EC associé</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </td>
+                </tr>
 
-               </tr>
 
                 </tbody>
 

@@ -1,5 +1,6 @@
 package uasz.sn.Gestion_Enseignement;
 
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -8,9 +9,11 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import uasz.sn.Gestion_Enseignement.authentification.modele.Role;
 import uasz.sn.Gestion_Enseignement.authentification.service.UtilisateurService;
+import uasz.sn.Gestion_Enseignement.maquette.modele.Classe;
 import uasz.sn.Gestion_Enseignement.maquette.modele.EC;
 import uasz.sn.Gestion_Enseignement.maquette.modele.Formation;
 import uasz.sn.Gestion_Enseignement.maquette.modele.UE;
+import uasz.sn.Gestion_Enseignement.maquette.service.ClasseService;
 import uasz.sn.Gestion_Enseignement.maquette.service.FormationService;
 import uasz.sn.Gestion_Enseignement.maquette.service.UEService;
 import uasz.sn.Gestion_Enseignement.utilisateur.modele.Permanant;
@@ -18,19 +21,21 @@ import uasz.sn.Gestion_Enseignement.utilisateur.modele.Vacataire;
 import uasz.sn.Gestion_Enseignement.utilisateur.service.EnseignantService;
 
 import java.util.Date;
-
+@AllArgsConstructor
 @SpringBootApplication
 public class GestionEnseignementApplication implements CommandLineRunner {
-	@Autowired
+
 	private UtilisateurService utilisateurService;
-	@Autowired
+
 	private EnseignantService enseignantService;
-	@Autowired
+
 	private PasswordEncoder passwordEncoder;
-	@Autowired
+
 	private UEService ueService;
-    @Autowired
+
     private FormationService formationService;
+
+	private ClasseService classeService;
 
 	public PasswordEncoder passwordEncoder() {
 		return new BCryptPasswordEncoder();
@@ -98,6 +103,31 @@ public class GestionEnseignementApplication implements CommandLineRunner {
 		ue2.setCredit(8);
 		ue2.setCoeff(6);
 		ueService.ajouterUE(ue2);
+
+
+		Formation f=new Formation();
+		f.setNomFormation("Ingenierie Informatique");
+		f.setDescription("formation en Informatique");
+		f.setActive(true);
+		f.setArchive(false);
+		formationService.ajouterFormation(f);
+
+		Formation f1=new Formation();
+		f1.setNomFormation("Mathematique et Informatique");
+		f1.setDescription("formation Math et  Informatique");
+		f1.setActive(true);
+		f1.setArchive(false);
+		formationService.ajouterFormation(f1);
+
+		Classe classe=new Classe();
+		classe.setNomClasse("L2i");
+		classe.setNiveau("L1");
+		classe.setArchive(false);
+		classe.setFormation(f);
+		classeService.AjouterClasse(classe);
+
+
+
 
 
 	}

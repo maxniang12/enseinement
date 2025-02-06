@@ -52,15 +52,20 @@ public class MaquetteService {
 
     public Maquette RechercherMaquette(Long id) {
 
-        Maquette maquette = maquetteRepository.findMaquetteWithUE(id);
+//        return maquetteRepository.findMaquetteWithUE(id);
 
-        List<UE> ues = maquette.getUE();
-        if (ues != null && !ues.isEmpty()) {
-            List<UE> uesWithEC = maquetteRepository.findUEWithEC(ues);
-            maquette.setUE(uesWithEC); // Met à jour les UE avec leurs EC
-        }
+        return  maquetteRepository.findById(id).get();
 
-        return maquette;
+        // Charge les EC pour chaque UE
+//        List<UE> ues = maquette.getUE();
+//        if (ues != null && !ues.isEmpty()) {
+//            List<UE> uesWithEC = maquetteRepository.findUEWithEC(ues);
+//            maquette.setUE(uesWithEC); // Met à jour les UE avec leurs EC
+//        }
+
+
+
+
     }
 
 //        // Charger les UEs avec leurs ECs sans modifier directement l'objet dans la boucle

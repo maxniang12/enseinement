@@ -5,6 +5,8 @@ import lombok.AllArgsConstructor;
 import lombok.*;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.BatchSize;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 import java.util.*;
 
@@ -25,7 +27,6 @@ public class UE {
 
 
     @OneToMany
-    @BatchSize(size = 10) // Charge les EC par lots de 10
     private List<EC> EC = new ArrayList<>();
     @ManyToMany
     private List<Maquette> maquettes =new ArrayList<>();

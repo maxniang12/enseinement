@@ -15,13 +15,24 @@ public interface MaquetteRepository extends JpaRepository<Maquette, Long> {
     @Query("SELECT m FROM Maquette m JOIN FETCH m.UE WHERE m.classe.id = :classeId")
     List<Maquette> findMaquettesWithUEsByClasseId(@Param("classeId") Long classeId);
 
-    // Charge une Maquette avec ses UE
-    @Query("SELECT m FROM Maquette m JOIN FETCH m.UE WHERE m.id = :id")
-    Maquette findMaquetteWithUE(@Param("id") Long id);
 
-    // Charge les UE avec leurs EC
-    @Query("SELECT ue FROM UE ue JOIN FETCH ue.EC WHERE ue IN :ues")
-    List<UE> findUEWithEC(@Param("ues") List<UE> ues);
+//    @Query("SELECT m FROM Maquette m JOIN FETCH m.UE ue JOIN FETCH ue.EC WHERE m.id = :id")
+//    Maquette findMaquetteWithUEAndEC(@Param("id") Long id);
+
+
+//    @Query("SELECT m FROM Maquette m JOIN FETCH m.UE WHERE m.id = :id")
+//    Maquette findMaquetteWithUE(@Param("id") Long id);
+//
+//    @Query("SELECT ue FROM UE ue JOIN FETCH ue.EC WHERE ue IN :ues")
+//    List<UE> findUEWithEC(@Param("ues") List<UE> ues);
+
+    // Charge une Maquette avec ses UE
+//    @Query("SELECT m FROM Maquette m JOIN FETCH m.UE WHERE m.id = :id")
+//    Maquette findMaquetteWithUE(@Param("id") Long id);
+//
+//    // Charge les UE avec leurs EC
+//    @Query("SELECT ue FROM UE ue JOIN FETCH ue.EC WHERE ue IN :ues")
+//    List<UE> findUEWithEC(@Param("ues") List<UE> ues);
 
 
 

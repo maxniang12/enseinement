@@ -24,7 +24,7 @@ public class UEService {
         return ueRepository.save(ue);
     }
     public List<UE> listerlUE() {
-        return ueRepository.findAllWithECs();
+        return ueRepository.findAll();
     }
     public void supprimerUe(Long id) {
         ueRepository.deleteById(id);

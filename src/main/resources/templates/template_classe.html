@@ -58,7 +58,7 @@
 
         <div class="table-responsive">
             <table  class="table table-bordered table-striped" id="table_Classe">
-                <thead>
+                <thead style="background-color: #083347;color: #ffffff">
                 <tr>
                     <th>NOM</th>
                     <th>Niveau de La Classe</th>
@@ -66,7 +66,7 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr th:each="cl:${listeClasse}">
+                <tr th:each="cl:${formation.classes}">
                     <td th:text="${cl.nomClasse}"></td>
                     <td th:text="${cl.niveau}"></td>
                     <td>

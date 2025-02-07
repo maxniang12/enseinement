@@ -100,14 +100,14 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr th:each="ec:${listeEc}">
+                <tr th:each="ec:${ue.ecs}">
                     <td th:text="${ec.code}"></td>
                     <td th:text="${ec.libelle}"></td>
                     <td th:text="${ec.tp}" ></td>
                     <td th:text="${ec.td}"></td>
                     <td th:text="${ec.cm}"></td>
                     <td th:text="${ec.tpe}"></td>
-                    <td th:text="${(ec.cm != null ? ec.cm : 0) + (ec.td != null ? ec.td : 0) + (ec.tp != null ? ec.tp : 0)}"></td>
+                    <td th:text="${ec.cm + ec.td + ec.tp}"></td>
                     <td th:text="${ec.coeff}"></td>
                     <td>
                         <button  class="btn btn-info btn-sm" data-title="Edit" data-toggle="modal" th:attr="data-target='#form_Modifier_EC'+${ec.id}">Modifier</button>

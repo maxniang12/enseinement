@@ -133,17 +133,6 @@ public class GestionEnseignementApplication implements CommandLineRunner {
 		f1.setArchive(false);
 		formationService.ajouterFormation(f1);
 
-		Classe classe=new Classe();
-		classe.setNomClasse("L2i");
-		classe.setNiveau("L1");
-		classe.setArchive(false);
-		classe.setFormation(f);
-		classeService.AjouterClasse(classe);
-
-
-
-
-
 	}
 	
 

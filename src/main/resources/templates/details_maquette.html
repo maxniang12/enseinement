@@ -9,8 +9,8 @@
 <div layout:fragment="custom-content">
     <div class="container mt-4">
 
-        <h2 class="text-center" th:text="'Détails de la Maquette - ' + ${maquette.nomMaquette}"></h2>
-        <h4 class="text-center" th:text="'Semestre: ' + ${maquette.semestre}"></h4>
+        <h2 class="text-center" th:text="'Détails de la Maquette - ' + ${maquette.nomMaquette}" ></h2>
+        <h4 class="text-center" th:text="'Semestre: ' + ${maquette.semestre}" style="color: #d60b04"></h4>
 
         <div class="table-responsive">
             <table class="table table-bordered table-striped" id="table_MaquettDet">
@@ -46,7 +46,7 @@
 
 <!--                </tbody>-->
 
-                <thead class="table-light">
+                <thead class="table-light" style="background-color: #083347;color: #ffffff">
                 <tr>
                     <th rowspan="2" class="text-center align-middle">UNITÉS D'ENSEIGNEMENT</th>
                     <th rowspan="2">Crédits</th>
@@ -54,13 +54,7 @@
                     <th colspan="7" >ÉLÉMENTS CONSTITUTIFS</th>
                 </tr>
                 <tr>
-                    <th></th>
-                    <th></th>
-                    <th></th>
-                    <th></th>
-                    <th></th>
-                    <th></th>
-                    <th></th>
+
                 </tr>
 
                 </thead>
@@ -92,9 +86,7 @@
                                 <td th:text="${ec.tpe}"></td>
                                 <td th:text="${ec.coeff}"></td>
                             </tr>
-                            <tr th:if="${#lists.isEmpty(ue.ecs)}">
-                                <td colspan="7" class="text-center">Aucun EC associé</td>
-                            </tr>
+
                             </tbody>
                         </table>
                     </td>

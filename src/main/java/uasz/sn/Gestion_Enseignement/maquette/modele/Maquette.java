@@ -29,6 +29,4 @@ public class Maquette {
     @ManyToOne
     private Classe classe;
 
-
-
 }

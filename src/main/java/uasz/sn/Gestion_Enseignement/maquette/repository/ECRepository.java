@@ -9,8 +9,10 @@ import uasz.sn.Gestion_Enseignement.maquette.modele.UE;
 import java.util.List;
 
 public interface ECRepository extends JpaRepository<EC, Long> {
-    @Query("select  e from  EC e  where  e.code= :code")
-    EC findECByCode(@Param("code") String code);
+//    @Query("select  e from  EC e  where  e.code= :code")
+//    EC findECByCode(@Param("code") String code);
 
-    List<EC> findByUeId(Long ueId);
+    @Query("SELECT e FROM EC e WHERE e.ue = :ue")
+    List<EC> findByUeId(@Param("ue") UE ue);
+
 }

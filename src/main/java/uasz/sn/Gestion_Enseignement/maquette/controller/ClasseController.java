@@ -33,7 +33,7 @@ public class ClasseController {
     model.addAttribute("prenom", utilisateur.getPrenom());
     List<Formation> formationList=formationService.ListerFormations();
     model.addAttribute("nomFormation", formation.getNomFormation());
-    List<Classe> listeClasse = classeService.listeDesClassDeFormation(formation.getId());
+    List<Classe> listeClasse = classeService.listeDesClassDeFormation(formation);
     model.addAttribute("listeClasse", listeClasse);
     model.addAttribute("formationList", formationList);
     return "template_classe";
@@ -46,7 +46,9 @@ public class ClasseController {
     classe.setNomClasse(nomclasse);
     classe.setNiveau(niveau);
     classe.setFormation(formation);
+    formation.getClasses().add(classe);
     classeService.AjouterClasse(classe);
+    formationService.ajouterFormation(formation);
     return "redirect:/ChefDepartement/Classe/{id}";
 
 }

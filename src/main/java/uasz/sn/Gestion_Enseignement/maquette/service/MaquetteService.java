@@ -3,6 +3,7 @@ package uasz.sn.Gestion_Enseignement.maquette.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import uasz.sn.Gestion_Enseignement.maquette.modele.Classe;
 import uasz.sn.Gestion_Enseignement.maquette.modele.Maquette;
 import uasz.sn.Gestion_Enseignement.maquette.modele.UE;
 import uasz.sn.Gestion_Enseignement.maquette.repository.MaquetteRepository;
@@ -26,8 +27,8 @@ public class MaquetteService {
 
     public void AjouterMaquette(Maquette maquette, List<Long> ueIds) {
         // Récupérer les UEs par leurs IDs
-        List<UE> ues = ueRepository.findAllById(ueIds);
-        maquette.setUes(ues);
+//        List<UE> ues = ueRepository.findAllById(ueIds);
+//        maquette.setUes(ues);
         maquetteRepository.save(maquette);
     }
 
@@ -102,7 +103,7 @@ public class MaquetteService {
 //
 //       return maquetteRepository.findClasseById(idc);
 //    }
-    public List<Maquette> ListerMaquetteByClasse(Long idc) {
-        return maquetteRepository.findMaquettesWithUEsByClasseId(idc); // Utilisation de la nouvelle méthode
+    public List<Maquette> ListerMaquetteByClasse(Classe classe) {
+        return maquetteRepository.findMaquettesWithUEsByClasseId(classe); // Utilisation de la nouvelle méthode
     }
 }

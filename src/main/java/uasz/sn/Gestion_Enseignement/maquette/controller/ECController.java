@@ -18,6 +18,7 @@ import java.util.List;
 
 @Controller
 @AllArgsConstructor
+
 public class ECController {
 
 
@@ -38,10 +39,9 @@ public class ECController {
         model.addAttribute("prenom", user.getPrenom());
         List<EC> listeECTOUt=ecService.listerToutEC();
         List<UE>  listeUE=ueService.listerlUE();
-        List<EC> listeEc=ecService.listeDesECDeUe(ue.getId());
+        List<EC> listeEc=ecService.listeDesECDeUe(ue);
         model.addAttribute("listeUE", listeUE);
         model.addAttribute("listeEc", listeEc);
-        model.addAttribute("listeECTOUt", listeECTOUt);
         return "ue_details";
 
     }
@@ -80,7 +80,9 @@ public class ECController {
         ec.setTd(td);
         ec.setCm(cm);
         ec.setUe(ue);
+        ue.getEcs().add(ec);
         ecService.ajouterEC(ec);
+        ueService.ajouterUE(ue);
         return  "redirect:/ChefDepartement/EC?id="+ec.getUe().getId();
     }
 

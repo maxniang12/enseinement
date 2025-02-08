@@ -10,7 +10,7 @@
     <div class="container mt-4">
 
         <h2 class="text-center" th:text="'Détails de la Maquette - ' + ${maquette.nomMaquette}" ></h2>
-        <h4 class="text-center" th:text="'Semestre: ' + ${maquette.semestre}" style="color: #d60b04"></h4>
+        <h3><h4 class="text-center" th:text="${maquette.semestre}" style="color: #d60b04"></h4></h3>
 
         <div class="table-responsive">
             <table class="table table-bordered table-striped" id="table_MaquettDet">

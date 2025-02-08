@@ -13,7 +13,7 @@ import uasz.sn.Gestion_Enseignement.maquette.modele.Maquette;
 public class Enseignement {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
     private String type;
     @ManyToOne
     private EC ec;

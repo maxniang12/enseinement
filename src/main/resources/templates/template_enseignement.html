@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="template_chefDepartement">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div layout:fragment="custom-content">
+    <div class="container mt-4">
+
+        <h3 style="text-align: center;color: #033609;background-color: rgba(241,174,63,0.2)">La liste  des  enseignements  </h3>
+
+        <div class="row" style="padding-bottom: 10px; padding-top: 10px">
+            <div style="text-align: center">
+                <button type="button" class="btn btn-success" data-toggle="modal" data-target="#form_Ajouter_Enseignement" >Ajouter</button>
+            </div>
+        </div>
+        <div data-dismiss="modal" style="margin-top:25px">
+            <div class="modal fade" id="form_Ajouter_Enseignement">
+                <div class="modal-dialog" >
+                    <div class="modal-content panel-success" >
+                        <!--modal Header-->
+                        <div class="modal-header panel-heading" >
+                            <button type="button" class="close" data-dismiss="modal">x</button>
+                            <h4 class="modal-title" style="text-align: center">Ajouter  des enseignements</h4>
+                        </div>
+                        <!--modal Body-->
+                        <form th:action="@{/ChefDepartement/AjoutEnseignement}" method="post">
+                            <div class="modal-body" >
+
+                                <div class="form-group">
+                                   <label>Selectionner des Maquettes </label>
+                                    <div  th:each="maquette:${maquettes}">
+                                        <input type="checkbox" th:value="${maquette.id}" name="maquetteId"/>
+                                        <span th:text="${maquette.nomMaquette+'--'+maquette.semestre}"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--modal Footer-->
+                            <div class="modal-footer" >
+                                <div class="row">
+                                    <div class="col-lg-3  col-md-3 col-sm-3 col-xs-4">
+                                        <button type="submit" class="btn btn-success">Ajouter</button>
+                                    </div>
+                                    <div class="col-lg-offset-5 col-lg-3 col-md-offset-5 col-md-3 col-sm-offset-5 col-sm-3 col-xs-8">
+                                        <button type="submit" class="btn btn-default " data-dismiss="modal">Annuler</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="table-responsive">
+            <table  class="table table-bordered table-striped" id="table_EnseiTab">
+                <thead style="background-color: #083347;color: #ffffff">
+                <tr>
+                    <th>Nom de la maquette</th>
+                    <th> nom de enseignement</th>
+                    <th>Type de Enseignement</th>
+                    <th style="text-align:center" colspan="2">actions</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="en:${listEnseignement}">
+                    <td th:text="${en.maquette.nomMaquette+'--'+en.maquette.semestre}"></td>
+                    <td th:text="${en.ec.libelle}"></td>
+                    <td th:text="${en.typeService}"></td>
+                    <td>
+                    </td>
+                    <td>
+                        <a class="btn btn-info btn-sm">
+                            nio gui nieuw fofu
+                        </a>
+                    </td>
+
+
+
+                    <!--
+                    archiver ou desarchiver une formation
+                    -->
+
+                    <!--
+                   fin  archiver ou desarchiver une formation
+                   -->
+
+
+                </tr>
+                </tbody>
+
+            </table>
+
+
+            <script>
+                $(document).ready(function() {
+                    $("#table_EnseiTab").DataTable({
+
+                    });
+                })
+            </script>
+
+        </div>
+
+
+
+    </div>
+</div>
+
+</body>
+</html>

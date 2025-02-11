@@ -1,11 +1,13 @@
 package uasz.sn.Gestion_Enseignement.utilisateur.modele;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Inheritance;
-import jakarta.persistence.InheritanceType;
-import jakarta.persistence.PrimaryKeyJoinColumn;
+import jakarta.persistence.*;
 import lombok.*;
 import uasz.sn.Gestion_Enseignement.authentification.modele.Utilisateur;
+import uasz.sn.Gestion_Enseignement.enseignements.model.Enseignement;
+import uasz.sn.Gestion_Enseignement.enseignements.model.Repartition;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Data
@@ -16,6 +18,9 @@ import uasz.sn.Gestion_Enseignement.authentification.modele.Utilisateur;
 public abstract class Enseignant extends Utilisateur {
    private String specialite;
    private Boolean archive = false;
+
+   @OneToMany(mappedBy = "enseignant", cascade = CascadeType.ALL)
+   private List<Repartition> repartitions = new ArrayList<>();
 
 
    public boolean isArchive() {

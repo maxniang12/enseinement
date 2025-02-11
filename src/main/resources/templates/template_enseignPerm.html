@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="template_Permanent">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<div layout:fragment="content">
+    <div class="container mt-4">
+        <div class="table-responsive">
+            <table  class="table table-bordered table-striped" id="table_enseignement">
+                <thead style="background-color: #083347;color: #ffffff">
+                <tr>
+                    <th>Nom de la maquette</th>
+                    <th> nom de enseignement</th>
+                    <th>Type de Enseignement</th>
+                    <th style="text-align:center" colspan="2">actions</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="en:${listEnseignement}">
+                    <td th:text="${en.maquette.nomMaquette+'--'+en.maquette.semestre}"></td>
+                    <td th:text="${en.ec.libelle}"></td>
+                    <td th:text="${en.typeService}"></td>
+                    <td>
+                    </td>
+                    <td>
+                        <form th:action="@{/Permanent/ChoisirEnseignement}" method="post">
+                            <input type="hidden" name="enseignementId" th:value="${en.id}">
+                            <input type="hidden" name="enseignantId" th:value="${utilisateur.id}">
+                            <button type="submit" class="btn btn-success">Choisir</button>
+                        </form>
+                    </td>
+
+
+
+                    <!--
+                    archiver ou desarchiver une formation
+                    -->
+
+                    <!--
+                   fin  archiver ou desarchiver une formation
+                   -->
+
+
+                </tr>
+                </tbody>
+
+            </table>
+
+            <script>
+                $(document).ready(function() {
+                    $("#table_enseignement").DataTable({
+
+                    });
+                })
+            </script>
+
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

@@ -1,22 +1,30 @@
 package uasz.sn.Gestion_Enseignement.enseignements.model;
 
-
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import uasz.sn.Gestion_Enseignement.utilisateur.modele.Enseignant;
 
-@Data
+import java.time.LocalDate;
+
 @Entity
-@NoArgsConstructor
-@AllArgsConstructor
-public class Repartition {
+@Data
+@AllArgsConstructor @NoArgsConstructor
 
+public class Repartition {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @ManyToOne
+    @JoinColumn(name = "enseignement_id", nullable = false)
+    private Enseignement enseignement;
+
+    @ManyToOne
+    @JoinColumn(name = "enseignant_id", nullable = false)
+    private Enseignant enseignant;
+
+    @Column(name = "date")
+    private LocalDate date;
 }

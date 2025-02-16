@@ -18,6 +18,7 @@ import uasz.sn.Gestion_Enseignement.utilisateur.repository.EnseignantRepository;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Objects;
 
 @Service
 @Transactional
@@ -81,6 +82,16 @@ public class EnseignementService {
     }
     public List<Repartition> voirRepartition() {
         return repartitionRepository.findAll();
+    }
+
+    public Boolean enseignantADejasChoisir( Long enseignantId,Long enseignementId,List<Repartition> repartitions){
+
+        return repartitions.stream()
+                .anyMatch(r -> r.getEnseignant() != null && r.getEnseignement() != null &&
+                        Objects.equals(r.getEnseignant().getId(), enseignantId) &&
+                        Objects.equals(r.getEnseignement().getId(), enseignementId));
+
+
     }
 
 }

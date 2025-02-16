@@ -9,7 +9,7 @@
 <body>
 
 <div layout:fragment="content">
-    <div class="container mt-4">
+    <div class="container">
         <div class="table-responsive">
             <table  class="table table-bordered table-striped" id="table_enseignement">
                 <thead style="background-color: #083347;color: #ffffff">
@@ -31,7 +31,10 @@
                         <form th:action="@{/Permanent/ChoisirEnseignement}" method="post">
                             <input type="hidden" name="enseignementId" th:value="${en.id}">
                             <input type="hidden" name="enseignantId" th:value="${utilisateur.id}">
-                            <button type="submit" class="btn btn-success">Choisir</button>
+                            <button type="submit"
+                                    th:class="${choixEfectue[en.id]} ? 'btn btn-danger' : 'btn btn-success'">
+                                <span th:text="${choixEfectue[en.id]} ? 'Choix déjà fait' : 'Choisir'"></span>
+                            </button>
                         </form>
                     </td>
 

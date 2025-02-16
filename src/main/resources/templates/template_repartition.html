@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="template_chefDepartement">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+   <div layout:fragment="custom-content">
+
+     <div class="container">
+         <h3 class="text-center" >La liste des  choix des enseignants a valider  <span></span></h3>
+
+         <div class="table-responsive">
+             <table  class="table table-bordered table-striped" id="table_Rep">
+                 <thead style="background-color: #083347;color: #ffffff">
+                 <tr>
+                     <th>module</th>
+                     <th>Enseignant</th>
+                     <th>Type de Enseignement</th>
+                     <th>Date de Choix</th>
+                     <th>Validation</th>
+                 </tr>
+
+                 </thead>
+                 <tbody>
+                 <tr th:each="repartition : ${repartitions}">
+                     <td th:text="${repartition.enseignement.ec.code} + ' - ' + ${repartition.enseignement.ec.libelle}"></td>
+                     <td th:text="${repartition.enseignant.nom} + ' ' + ${repartition.enseignant.prenom}"></td>
+                     <td th:text="${repartition.enseignement.typeService}"></td>
+                     <td th:text="${repartition.date}"></td>
+                     <td>
+                         <button th:if="${!repartition.isValide}" class="btn btn-danger btn-xs" data-toggle="modal" th:attr="data-target='#form_Valider_Repartition'+${repartition.id}">invalide</button>
+                         <button th:if="${repartition.isValide}" class="btn btn-success btn-xs" data-toggle="modal" th:attr="data-target='#form_Valider_Repartition'+${repartition.id}">valider</button>
+                     </td>
+                     <div data-dismiss="modal">
+                         <div class="modal fade" th:attr="id='form_Valider_Repartition'+${repartition.id}" tabindex="-1" role="dialog">
+                             <div class="modal-dialog">
+                                 <div th:class="${repartition.isValide} ? 'modal-content bg-vert' : 'modal-content bg-jaune'">
+                                     <div class="modal-header">
+                                         <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                         <h4 class="modal-title" th:text="${repartition.isValide} ? 'Invalider un choix' : 'Valider un choix'">Valider un choix</h4>
+                                     </div>
+                                     <form th:action="@{/ChefDepartement/ValiderChoix/}" method="post">
+                                         <div class="modal-body">
+                                             <input type="hidden" name="id" th:value="${repartition.id}" />
+                                             <p><strong>Enseignant :</strong> <span th:text="${repartition.enseignant.nom} + ' ' + ${repartition.enseignant.prenom}"></span></p>
+                                             <p><strong>Enseignement :</strong> <span th:text="${repartition.enseignement.ec.libelle} + ' - ' + ${repartition.enseignement.typeService}"></span></p>
+                                         </div>
+                                         <div class="modal-footer">
+                                             <button type="submit" class="btn" th:class="${repartition.isValide} ?    'btn-danger' : 'btn-success'  " th:text="${repartition.isValide} ? 'Invalider' : 'Valider'"></button>
+                                             <button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
+                                         </div>
+                                     </form>
+                                 </div>
+                             </div>
+                         </div>
+                     </div>
+
+                 </tr>
+
+                 <script>
+                     $(document).ready(function() {
+                         $("#table_Rep").DataTable({
+
+                         });
+                     })
+                 </script>
+
+                 </tbody>
+             </table>
+         </div>
+
+
+   </div>
+
+   </div>
+
+</body>
+</html>

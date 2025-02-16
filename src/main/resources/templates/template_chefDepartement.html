@@ -28,21 +28,23 @@
                     </li>
 
                     <li>
-                        <a th:href="@{/ChefDepartement/EnseignementLister}" ><span>Enseignements</span></a>
+                        <a th:href="@{/ChefDepartement/Formation}" ><span>Formations</span></a>
                     </li>
+
+
 
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                             <span> Syllabus</span><span class="caret"></span>
                         </a>
-                        <ul class="dropdown-menu" style="background-color: #353333">
+                        <ul class="dropdown-menu" style="background-color: #083347">
                             <li>
-                                <a th:href="@{/ChefDepartement/UE}" style="color: #14d123"><span>UE</span></a>
+                                <a th:href="@{/ChefDepartement/UE}" style="color: #000405"><span>UE</span></a>
                             </li>
                             <li>
-                                <a th:href="@{/ChefDepartement/ECTout}" style="color: #14d123"><span>EC</span></a>
+                                <a th:href="@{/ChefDepartement/ECTout}" style="color: #000405"><span>EC</span></a>
                             </li>
-                            <li><a style="color: #14d123"><span></span></a>
+                            <li><a ><span></span></a>
                             </li>
                         </ul>
                     </li>
@@ -59,13 +61,15 @@
                     </li>
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                            <span> Formations</span><span class="caret"></span>
+                            <span>Enseignements</span><span class="caret"></span>
                         </a>
-                        <ul class="dropdown-menu" style="background-color: #353333">
+                        <ul class="dropdown-menu" style="background-color: #083347">
                             <li>
-                                <a th:href="@{/ChefDepartement/Formation}" style="color: #14d123"><span>Formation</span></a>
+                                <a th:href="@{/ChefDepartement/EnseignementLister}" style="color: #000405"><span>Enseignements</span></a>
                             </li>
-                            <li><a style="color: #14d123"><span></span></a>
+                            <li><a  th:href="@{/ChefDepartement/Repartition}"  style="color: #000405"><span>Enseignements--A Valider</span></a>
+                            </li>
+                            <li><a  th:href="@{/ChefDepartement/RepartitionValides}"  style="color: #000405"><span>Repartitions</span></a>
                             </li>
                         </ul>
                     </li>

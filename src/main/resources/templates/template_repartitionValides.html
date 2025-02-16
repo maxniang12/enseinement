@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="template_chefDepartement">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div layout:fragment="custom-content">
+     <br>
+    <div class="container">
+        <h3 class="text-center" >La liste des  Repartitions  <span></span></h3>
+        <br>
+        <div class="table-responsive">
+            <table  class="table table-bordered table-striped" id="table_Rep">
+                <thead style="background-color: #083347;color: #ffffff">
+                <tr>
+                    <th>module</th>
+                    <th>Enseignant</th>
+                    <th>Type de Enseignement</th>
+                    <th>Date de Choix</th>
+                </tr>
+
+                </thead>
+                <tbody>
+                <tr th:each="repartition : ${repartitionsValides}">
+                    <td th:text="${repartition.enseignement.ec.code} + ' - ' + ${repartition.enseignement.ec.libelle}"></td>
+                    <td th:text="${repartition.enseignant.nom} + ' ' + ${repartition.enseignant.prenom}"></td>
+                    <td th:text="${repartition.enseignement.typeService}"></td>
+                    <td th:text="${repartition.date}"></td>
+                </tr>
+
+                <script>
+                    $(document).ready(function() {
+                        $("#table_Rep").DataTable({
+
+                        });
+                    })
+                </script>
+
+                </tbody>
+            </table>
+        </div>
+
+
+    </div>
+
+</div>
+
+</body>
+</html>

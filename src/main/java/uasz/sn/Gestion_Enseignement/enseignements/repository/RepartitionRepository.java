@@ -7,5 +7,5 @@ import java.util.List;
 
 public interface RepartitionRepository extends JpaRepository<Repartition, Long> {
 
-    List<Repartition> findByIsValideTrue();
+    List<Repartition> findByValideTrue();
 }

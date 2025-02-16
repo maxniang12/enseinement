@@ -24,6 +24,6 @@ public class RepartitionService {
         }
 }
  public List<Repartition>  ListerRepartitionValides() {
-        return repartitionRepository.findByIsValideTrue();
+        return repartitionRepository.findByValideTrue();
  }
 }

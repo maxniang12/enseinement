@@ -23,9 +23,7 @@
                     <li>
                         <a th:href="@{/ChefDepartement/Accueil}"><span>Accueil</span></a>
                     </li>
-                    <li>
-                        <a><span>Emploi du Temps</span></a>
-                    </li>
+
 
                     <li>
                         <a th:href="@{/ChefDepartement/Formation}" ><span>Formations</span></a>
@@ -53,9 +51,7 @@
                       <a><span>Syllabus</span></a>
                     </li>-->
 
-                    <li>
-                        <a><span>Repartition</span></a>
-                    </li>
+
                     <li>
                         <a th:href="@{/Chefdepartement/Enseignant}"><span>Enseignants</span></a>
                     </li>
@@ -70,6 +66,19 @@
                             <li><a  th:href="@{/ChefDepartement/Repartition}"  style="color: #000405"><span>Enseignements--A Valider</span></a>
                             </li>
                             <li><a  th:href="@{/ChefDepartement/RepartitionValides}"  style="color: #000405"><span>Repartitions</span></a>
+                            </li>
+                        </ul>
+                    </li>
+
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            <span>Emplois du Temps </span><span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu" style="background-color: #083347">
+                            <li>
+                                <a th:href="@{/ChefDepartement/Seances}" style="color: #000405"><span>Ajout Seances</span></a>
+                            </li>
+                            <li><a    style="color: #000405"><span>Emplois du Temps </span></a>
                             </li>
                         </ul>
                     </li>

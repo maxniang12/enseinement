@@ -19,6 +19,10 @@
                     <th>module</th>
                     <th>Enseignant</th>
                     <th>Type de Enseignement</th>
+
+                    <th> Classe</th>
+                    <th>Duree</th>
+                    <th>Semestre</th>
                     <th>Date de Choix</th>
                 </tr>
 
@@ -28,6 +32,13 @@
                     <td th:text="${repartition.enseignement.ec.code} + ' - ' + ${repartition.enseignement.ec.libelle}"></td>
                     <td th:text="${repartition.enseignant.nom} + ' ' + ${repartition.enseignant.prenom}"></td>
                     <td th:text="${repartition.enseignement.typeService}"></td>
+                    <td th:text="${repartition.enseignement.maquette.classe.nomClasse} + '--'+ ${repartition.enseignement.maquette.classe.niveau}"></td>
+                    <td >
+                        <span th:if="${repartition.enseignement.typeService=='cm'}" th:text="${repartition.enseignement.ec.cm}"></span>
+                        <span th:if="${repartition.enseignement.typeService=='tp'}" th:text="${repartition.enseignement.ec.tp}"></span>
+                        <span th:if="${repartition.enseignement.typeService=='td'}" th:text="${repartition.enseignement.ec.td}"></span>
+                    </td>
+                    <td th:text="${repartition.enseignement.maquette.semestre}"></td>
                     <td th:text="${repartition.date}"></td>
                 </tr>
 

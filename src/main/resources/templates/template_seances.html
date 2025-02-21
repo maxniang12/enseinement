@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="template_chefDepartement">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<div layout:fragment="custom-content">
+
+        <div class="container">
+
+            <h3 class="text-center" >La liste des Seances<span></span></h3>
+            <br>
+
+            <div class="row" style="padding-bottom: 10px; padding-top: 10px">
+                <div style="text-align: center">
+                    <button type="button" class="btn btn-success" data-toggle="modal" data-target="#form_Ajouter_SEANCE" >Ajouter SEANCE</button>
+                </div>
+            </div>
+
+            <div data-dismiss="modal" style="margin-top:25px">
+                <div class="modal fade" id="form_Ajouter_SEANCE">
+                    <div class="modal-dialog" >
+                        <div class="modal-content panel-success" >
+                            <!--modal Header-->
+                            <div class="modal-header panel-heading" >
+                                <button type="button" class="close" data-dismiss="modal">x</button>
+                                <h4 class="modal-title" style="text-align: center">Ajouter Seance</h4>
+                            </div>
+                            <!--modal Body-->
+                            <form th:action="@{/ChefDepartement/AjouterSeance}" method="post">
+                                <div class="modal-body" >
+
+                                    <div class="form-group">
+                                        <label>Jour</label>
+                                        <select name="jour" >
+                                            <option value="Lundi">Lundi</option>
+                                            <option value="Mardi">Mardi</option>
+                                            <option value="Mercredi">Mercredi</option>
+                                            <option value="Jeudi">Jeudi</option>
+                                            <option value="Vendredi">Vendredi</option>
+                                            <option value="Samedi">Samedi</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="form-group">
+
+                                        <label>Heure - debut</label>
+                                        <input type="time" class="form-control" name="heuredeb"/>
+
+                                    </div>
+
+                                    <div class="form-group">
+
+                                        <label>Heure - Fin</label>
+                                        <input type="time" class="form-control" name="heurefin"/>
+
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label>Salle</label>
+                                        <select name="salle" class="form-control" required>
+                                            <option value="">-- Sélectionnez une salle--</option>
+                                            <option th:each="salle : ${salles}" th:value="${salle.id}" th:text="${salle.nomsal}+' '+${salle.numerosal}"></option>
+                                        </select>
+
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label></label>
+
+                                        <select name="repartition" class="form-control" required>
+                                            <option value="">-- Sélectionnez </option>
+                                            <option th:each="rep : ${repartitions}" th:value="${rep.id}" th:text="${rep.enseignement.ec.libelle}+'--'+${rep.enseignement.typeService}+'--'+${rep.enseignement.maquette.semestre}"></option>
+                                        </select>
+
+                                    </div>
+
+
+
+                                </div>
+                                <!--modal Footer-->
+                                <div class="modal-footer" >
+                                    <div class="row">
+                                        <div class="col-lg-3  col-md-3 col-sm-3 col-xs-4">
+                                            <button type="submit" class="btn btn-success">Ajouter</button>
+                                        </div>
+                                        <div class="col-lg-offset-5 col-lg-3 col-md-offset-5 col-md-3 col-sm-offset-5 col-sm-3 col-xs-8">
+                                            <button type="submit" class="btn btn-default " data-dismiss="modal">Annuler</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="table-responsive">
+                <table  class="table table-bordered table-striped" id="table_Seance">
+
+                    <thead style="background-color: #083347;color: #ffffff">
+                    <tr>
+                        <th>module</th>
+                        <th>Enseignant</th>
+                        <th>Type de Enseignement</th>
+                        <th>Salle</th>
+                        <th>Jour</th>
+                        <th>date Debut </th>
+                        <th>Date Fin</th>
+                    </tr>
+
+                    </thead>
+                    <tbody>
+                    <tr th:each="seance : ${seances}">
+                        <td th:text="${seance.repartition.enseignement.ec.code} + ' - ' + ${seance.repartition.enseignement.ec.libelle}"></td>
+                        <td th:text="${seance.repartition.enseignant.nom} + ' ' + ${seance.repartition.enseignant.prenom}"></td>
+                        <td th:text="${seance.repartition.enseignement.typeService}"></td>
+                        <td th:text="${seance.salle}"></td>
+                        <td th:text="${seance.jour}"></td>
+                        <td th:text="${seance.heuredeb}"></td>
+                        <td th:text="${seance.heurefin}"></td>
+                    </tr>
+
+
+
+                    </tbody>
+                    <script>
+                        $(document).ready(function() {
+                            $("#table_Seance").DataTable({
+
+                            });
+                        })
+                    </script>
+
+                </table>
+
+            </div>
+
+
+
+        </div>
+</div>
+            <
+
+</body>
+</html>

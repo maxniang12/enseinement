@@ -4,10 +4,7 @@ package uasz.sn.Gestion_Enseignement.maquette.controller;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import uasz.sn.Gestion_Enseignement.authentification.modele.Utilisateur;
 import uasz.sn.Gestion_Enseignement.authentification.service.UtilisateurService;
 import uasz.sn.Gestion_Enseignement.maquette.modele.*;
@@ -90,6 +87,34 @@ private ClasseService classeService;
       return "redirect:/ChefDepartement/Maquette/{id}";
 
     }
+
+    @PostMapping("/ChefDepartement/ModifierMaquette/{id}")
+    public String Modifier_Maquette(@PathVariable("id") Long id,
+                                    @RequestParam("idm") Long idm,
+                                    @RequestParam("nomMaquette") String nomMaquette,
+                                    @RequestParam("ueIds") List<Long> ueids) {
+        // Récupérer la maquette existante
+        Maquette maquette = maquetteService.RechercherMaquette(idm);
+
+        // Mettre à jour le nom de la maquette
+        maquette.setNomMaquette(nomMaquette);
+
+        // Récupérer les nouvelles UEs
+        List<UE> nouvellesUes = ueRepository.findAllById(ueids);
+
+        // Ajouter les nouvelles UEs à la maquette
+        for (UE ue : nouvellesUes) {
+            if (!maquette.getUes().contains(ue)) {
+                maquette.getUes().add(ue);
+            }
+        }
+
+        // Sauvegarder les modifications
+        maquetteService.AjouterMaquette(maquette, ueids);
+
+        return "redirect:/ChefDepartement/Maquette/{id}";
+    }
+
 
     @GetMapping("/ChefDepartement/Maquette/{id}/details")
     public String afficherDetailsMaquette(@PathVariable("id") Long id, Model model, Principal principal) {

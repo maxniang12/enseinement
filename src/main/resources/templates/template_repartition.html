@@ -19,6 +19,9 @@
                      <th>module</th>
                      <th>Enseignant</th>
                      <th>Type de Enseignement</th>
+                     <th> Classe</th>
+                     <th>Semestre</th>
+
                      <th>Date de Choix</th>
                      <th>Validation</th>
                  </tr>
@@ -29,6 +32,8 @@
                      <td th:text="${repartition.enseignement.ec.code} + ' - ' + ${repartition.enseignement.ec.libelle}"></td>
                      <td th:text="${repartition.enseignant.nom} + ' ' + ${repartition.enseignant.prenom}"></td>
                      <td th:text="${repartition.enseignement.typeService}"></td>
+                     <td th:text="${repartition.enseignement.maquette.classe.nomClasse} + '--'+ ${repartition.enseignement.maquette.classe.niveau}"></td>
+                     <td th:text="${repartition.enseignement.maquette.semestre}"></td>
                      <td th:text="${repartition.date}"></td>
                      <td>
                          <button th:if="${!repartition.isValide}" class="btn btn-danger btn-xs" data-toggle="modal" th:attr="data-target='#form_Valider_Repartition'+${repartition.id}">invalide</button>

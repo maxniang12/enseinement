@@ -82,6 +82,7 @@ public class MaquetteService {
 
 
     public Maquette ModifierMaquette(Maquette maquette) {
+
         return maquetteRepository.save(maquette);
 
     }

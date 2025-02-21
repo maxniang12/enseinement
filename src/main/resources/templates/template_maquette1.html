@@ -94,9 +94,59 @@
                             <li th:each="ue : ${maquette.ues}" th:text="${ue.libelle}"></li>
                         </ul>
                     </td>
+                    <button class="btn btn-info btn-sm" data-title="Edit" data-toggle="modal" th:attr="data-target='#form_Modifier_Maquette'+${maquette.id}" >
+                        Modifier
+                    </button>
                     <td>
                         <a class="btn btn-info btn-sm" th:href="@{/ChefDepartement/Maquette/{id}/details(id=${maquette.id})}">Détails</a>
                     </td>
+
+                    <div data-dismiss="modal">
+                        <div class="modal fade" th:attr="id='form_Modifier_Maquette'+${maquette.id}" >
+                            <div class="modal-dialog" >
+                                <div class="modal-content panel-info" >
+
+                                    <div class="modal-header panel-heading" >
+                                        <button type="button" class="close" data-dismiss="modal">x</button>
+                                        <h4 class="modal-title" style="text-align: center">Modifier Maquette</h4>
+                                    </div>
+
+                                    <form th:action="@{/ChefDepartement/ModifierMaquette/{id}(id=${classe.id})}" method="post">
+                                        <div class="modal-body" >
+                                            <div style="display: none">
+                                                <input name="idm" th:value="${maquette.id}" />
+                                            </div>
+                                            <div class="form-group">
+                                                <label >Nom  de la maquette</label>
+                                                <input type="text" class="form-control" name="nomMaquette" th:value="${maquette.nomMaquette}" />
+
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label>Unités d'Enseignement :</label>
+                                                <select name="ueIds" multiple required>
+                                                    <!-- Afficher toutes les UEs disponibles -->
+                                                    <option th:each="ue : ${listUes}" th:value="${ue.id}" th:text="${ue.libelle}" th:selected="${maquette.ues.contains(ue)}"></option>
+                                                </select>
+                                            </div>
+
+                                        </div>
+
+                                        <div class="modal-footer" >
+                                            <div class="row">
+                                                <div class="col-lg-3  col-md-3 col-sm-3 col-xs-4">
+                                                    <button type="submit" class="btn btn-info" >Modifier</button>
+                                                </div>
+                                                <div class="col-lg-offset-5 col-lg-3 col-md-offset-5 col-md-3 col-sm-offset-5 col-sm-3 col-xs-8">
+                                                    <button type="button" class="btn btn-default " data-dismiss="modal">Annuler</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </tr>
                 </tbody>
 

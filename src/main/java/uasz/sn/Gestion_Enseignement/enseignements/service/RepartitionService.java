@@ -26,4 +26,9 @@ public class RepartitionService {
  public List<Repartition>  ListerRepartitionValides() {
         return repartitionRepository.findByValideTrue();
  }
+
+ public Repartition RechercheRepartition(Long id) {
+        Optional<Repartition> repartitionOpt = repartitionRepository.findById(id);
+        return repartitionOpt.orElse(null);
+ }
 }

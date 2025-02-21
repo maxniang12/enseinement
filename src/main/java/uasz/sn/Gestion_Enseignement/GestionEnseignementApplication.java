@@ -9,6 +9,10 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import uasz.sn.Gestion_Enseignement.authentification.modele.Role;
 import uasz.sn.Gestion_Enseignement.authentification.service.UtilisateurService;
+import uasz.sn.Gestion_Enseignement.emplois_Du_Temps.modele.Batiment;
+import uasz.sn.Gestion_Enseignement.emplois_Du_Temps.modele.Salle;
+import uasz.sn.Gestion_Enseignement.emplois_Du_Temps.service.BatimentService;
+import uasz.sn.Gestion_Enseignement.emplois_Du_Temps.service.SalleService;
 import uasz.sn.Gestion_Enseignement.maquette.modele.Classe;
 import uasz.sn.Gestion_Enseignement.maquette.modele.EC;
 import uasz.sn.Gestion_Enseignement.maquette.modele.Formation;
@@ -36,6 +40,10 @@ public class GestionEnseignementApplication implements CommandLineRunner {
     private FormationService formationService;
 
 	private ClasseService classeService;
+	
+	private BatimentService batimentService;
+	
+	private SalleService salleService;
 
 	public PasswordEncoder passwordEncoder() {
 		return new BCryptPasswordEncoder();
@@ -133,7 +141,42 @@ public class GestionEnseignementApplication implements CommandLineRunner {
 		f1.setArchive(false);
 		formationService.ajouterFormation(f1);
 
+		Batiment bat1 = new Batiment();
+		bat1.setNombat("batiment Info");
+		batimentService.AjouterBatiment(bat1);
+
+		Batiment bat2 = new Batiment();
+		bat2.setNombat("batiment E");
+		batimentService.AjouterBatiment(bat2);
+
+		
+
+		Salle sal1 = new Salle();
+		sal1.setNomsal("Info");
+		sal1.setNumerosal("01");
+		sal1.setCapacite("70");
+		sal1.setBatiment(bat1);
+		salleService.AjouterSalle(sal1);
+		batimentService.ajouter_SalleBatiment(sal1,bat1);
+		Salle sal2 = new Salle();
+		sal2.setNomsal("Info");
+		sal2.setNumerosal("02");
+		sal2.setCapacite("80");
+		sal2.setBatiment(bat1);
+		salleService.AjouterSalle(sal2);
+		batimentService.ajouter_SalleBatiment(sal2,bat1);
+		Salle sal3 = new Salle();
+		sal3.setNomsal("E");
+		sal3.setNumerosal("03");
+		sal3.setCapacite("90");
+		sal3.setBatiment(bat2);
+		salleService.AjouterSalle(sal3);
+		batimentService.ajouter_SalleBatiment(sal3,bat2);
+
+
 	}
+
+
 	
 
 

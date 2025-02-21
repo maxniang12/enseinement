@@ -7,6 +7,8 @@
     <link rel="stylesheet" th:href="@{/css/bootstrap.css}"/>
     <link rel="stylesheet" th:href="@{/css/buttons.dataTables.min.css}"/>
     <link rel="stylesheet" th:href="@{/css/jquery.dataTables.min.css}"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+
 
     <script th:src="@{/js/jquery-3.7.0.js}"></script>
     <script th:src="@{/js/bootstrap.js}"></script>
@@ -78,7 +80,7 @@
                             <li>
                                 <a th:href="@{/ChefDepartement/Seances}" style="color: #000405"><span>Ajout Seances</span></a>
                             </li>
-                            <li><a    style="color: #000405"><span>Emplois du Temps </span></a>
+                            <li><a   th:href="@{/ChefDepartement/Emplois_Temps}" style="color: #000405"><span>Emplois du Temps </span></a>
                             </li>
                         </ul>
                     </li>
@@ -106,6 +108,86 @@
 <div layout:fragment="custom-content" >
 
     <div class="container">
+         <br><br>
+        <br>
+        <div class="container mt-5">
+            <div class="row">
+                <!-- Formation -->
+                <div class="col-md-4">
+                    <div class="card text-center shadow-lg">
+                        <div class="card-body">
+                            <i class="fas fa-graduation-cap fa-8x text-primary"></i>
+                            <h5 class="card-title mt-3">Formations</h5>
+                            <p class="card-text">Gérez les formations de votre département.</p>
+                            <a th:href="@{/ChefDepartement/Formation}" class="btn btn-primary">Voir</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Enseignants -->
+                <div class="col-md-4">
+                    <div class="card text-center shadow-lg">
+                        <div class="card-body">
+                            <i class="fas fa-chalkboard-teacher fa-8x text-success"></i>
+                            <h5 class="card-title mt-3">Enseignants</h5>
+                            <p class="card-text">Liste des enseignants du département.</p>
+                            <a th:href="@{/Chefdepartement/Enseignant}" class="btn btn-success">Voir</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Enseignements -->
+                <div class="col-md-4">
+                    <div class="card text-center shadow-lg">
+                        <div class="card-body">
+                            <i class="fas fa-book-open fa-8x text-warning"></i>
+                            <h5 class="card-title mt-3">Enseignements</h5>
+                            <p class="card-text">Gérez les enseignements et les répartitions.</p>
+                            <a th:href="@{/ChefDepartement/EnseignementLister}" class="btn btn-warning">Voir</a>
+                        </div>
+                    </div>
+                </div>
+            </div><br><br><br>
+               <br>
+            <div class="row mt-4">
+                <!-- Emploi du Temps -->
+                <div class="col-md-4">
+                    <div class="card text-center shadow-lg">
+                        <div class="card-body">
+                            <i class="fas fa-calendar-alt fa-8x text-danger"></i>
+                            <h5 class="card-title mt-3">Emplois du Temps</h5>
+                            <p class="card-text">Consultez et gérez les emplois du temps.</p>
+                            <a th:href="@{/ChefDepartement/Emplois_Temps}" class="btn btn-danger">Voir</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Syllabus -->
+                <div class="col-md-4">
+                    <div class="card text-center shadow-lg">
+                        <div class="card-body">
+                            <i class="fas fa-file-alt fa-8x text-info"></i>
+                            <h5 class="card-title mt-3">Syllabus</h5>
+                            <p class="card-text">Voir les Unités d’Enseignement et EC.</p>
+                            <a th:href="@{/ChefDepartement/UE}" class="btn btn-info">Voir</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Profil -->
+                <div class="col-md-4">
+                    <div class="card text-center shadow-lg">
+                        <div class="card-body">
+                            <i class="fas fa-user-circle fa-8x text-secondary"></i>
+                            <h5 class="card-title mt-3">Profil</h5>
+                            <p class="card-text">Gérez votre profil personnel.</p>
+                            <a th:href="@{/ChefDepartement/profile}" class="btn btn-danger">Voir</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
 
 
     </div>

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html  lang="en" xmlns:th="http://www.thymeleaf.org"
+       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+       layout:decorate="template_chefDepartement">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div layout:fragment="custom-content">
+    <br>
+    <div class="container">
+        <h3 class="text-center" >Emplois du Temps<span></span></h3>
+        <div>
+            <table class="table table-bordered table-striped border-collapse"  id="table_Rep" >
+                <thead style="background-color: #083347;color: #ffffff">
+                <tr>
+                     <th>Jour</th>
+                     <th>8h - 9h</th>
+                     <th>8h - 10h</th>
+                     <th>10h - 12h</th>
+                     <th>13h - 15h</th>
+                     <th>15h - 17h</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="jour : ${jours}">
+                    <td th:text="${jour}"></td>
+                    <td th:each="heure : ${heures}">
+                        <span th:each="seance : ${seances}"
+                              th:if="${seance.jour == jour and seance.heure == heure}">
+                            <b th:text=" 'Module : '+${seance.repartition.enseignement.ec.libelle}"></b> <br>
+                            <span th:text=" 'Professeur : ' + ${ seance.repartition.enseignant.nom} + ' ' + ${seance.repartition.enseignant.prenom}"></span> <br>
+                            <span style="color: #d60b04" th:text=" 'COURS : '+${seance.repartition.enseignement.typeService}"></span><br>
+                            <span style="color: #985f0d" th:text="'salle: ' + ${seance.salle.nomsal}+'--'+${seance.salle.numerosal}"></span>
+                        </span>
+                    </td>
+                </tr>
+                </tbody>
+                <script>
+                    $(document).ready(function() {
+                        $("#table_Rep").DataTable({
+
+                        });
+                    })
+                </script>
+            </table>
+
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

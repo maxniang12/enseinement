@@ -46,9 +46,57 @@ public class SeanceController {
     }
 
     @PostMapping("/ChefDepartement/AjouterSeance")
-    public String Ajouter_Seance (@RequestParam("jour") String jour, @RequestParam("heuredeb") String heuredeb, @RequestParam("heurefin") String heurefin,@RequestParam("repartition") Long repartitionId , @RequestParam("salle") Long salleId) {
-         seanceService.creerSeance(jour, heuredeb, heurefin, repartitionId, salleId);
+    public String Ajouter_Seance (@RequestParam("jour") String jour, @RequestParam("heure") String heuredeb,@RequestParam("repartition") Long repartitionId , @RequestParam("salle") Long salleId) {
+         seanceService.creerSeance(jour, heuredeb,repartitionId, salleId);
         return "redirect:/ChefDepartement/Seances";
+
+    }
+
+    @GetMapping("/ChefDepartement/Emplois_Temps")
+    public String Lister_Emplois_Temps (Model model, Principal principal) {
+        Utilisateur utilisateur= utilisateurService.rechercher_Utilisateur(principal.getName());
+        List<Seances> seancesList=seanceService.ListerSeances();
+        model.addAttribute("seances", seancesList);
+        model.addAttribute("nom", utilisateur.getNom());
+        model.addAttribute("prenom", utilisateur.getPrenom().charAt(0));
+        List<String> jours = Arrays.asList("Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi");
+        List<String> heures = Arrays.asList("8h - 9h","8h - 10h","10h - 12h","13h - 15h","15h - 17h");
+
+        model.addAttribute("jours", jours);
+        model.addAttribute("heures", heures);
+        return "template_emplois";
+
+    }
+
+    @GetMapping("/Permanent/Emplois_Temps")
+    public String Lister_Emplois_TempsVac (Model model, Principal principal) {
+        Utilisateur utilisateur= utilisateurService.rechercher_Utilisateur(principal.getName());
+        List<Seances> seancesList=seanceService.ListerSeances();
+        model.addAttribute("seances", seancesList);
+        model.addAttribute("nom", utilisateur.getNom());
+        model.addAttribute("prenom", utilisateur.getPrenom().charAt(0));
+        List<String> jours = Arrays.asList("Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi");
+        List<String> heures = Arrays.asList("8h - 9h","8h - 10h","10h - 12h","13h - 15h","15h - 17h");
+
+        model.addAttribute("jours", jours);
+        model.addAttribute("heures", heures);
+        return "template_emploisPerm";
+
+    }
+
+    @GetMapping("/Vacataire/Emplois_Temps")
+    public String Lister_Emplois_TempsPer (Model model, Principal principal) {
+        Utilisateur utilisateur= utilisateurService.rechercher_Utilisateur(principal.getName());
+        List<Seances> seancesList=seanceService.ListerSeances();
+        model.addAttribute("seances", seancesList);
+        model.addAttribute("nom", utilisateur.getNom());
+        model.addAttribute("prenom", utilisateur.getPrenom().charAt(0));
+        List<String> jours = Arrays.asList("Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi");
+        List<String> heures = Arrays.asList("8h - 9h","8h - 10h","10h - 12h","13h - 15h","15h - 17h");
+
+        model.addAttribute("jours", jours);
+        model.addAttribute("heures", heures);
+        return "template_emploisVac";
 
     }
 

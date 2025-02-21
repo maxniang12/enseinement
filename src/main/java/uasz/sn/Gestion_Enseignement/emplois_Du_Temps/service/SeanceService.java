@@ -23,15 +23,15 @@ public class SeanceService {
         return seancesRepository.findAll();
     }
 
-    public void creerSeance(String jour, String heuredeb,String heurefin, Long repartitionId, Long salleId) {
+    public void creerSeance(String jour, String heure, Long repartitionId, Long salleId) {
         Repartition repartition = repartitionService.RechercheRepartition(repartitionId);
 
         Salle salle = salleService.recherSalle(salleId);
 
         Seances seance = new Seances();
         seance.setJour(jour);
-        seance.setHeuredeb(heuredeb);
-        seance.setHeurefin(heurefin);
+        seance.setHeure(heure);
+
         seance.setRepartition(repartition);
         seance.setSalle(salle);
         salle.getSeances().add(seance);

@@ -13,8 +13,7 @@ public class Seances {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String jour;
-    private String heuredeb;
-    private String heurefin;
+    private String heure;
     @ManyToOne
     private Repartition repartition;
     @ManyToOne

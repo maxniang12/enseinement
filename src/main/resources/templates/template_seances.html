@@ -46,17 +46,11 @@
                                         </select>
                                     </div>
 
-                                    <div class="form-group">
-
-                                        <label>Heure - debut</label>
-                                        <input type="time" class="form-control" name="heuredeb"/>
-
-                                    </div>
 
                                     <div class="form-group">
 
-                                        <label>Heure - Fin</label>
-                                        <input type="time" class="form-control" name="heurefin"/>
+                                        <label>Horaire</label>
+                                        <input type="text" class="form-control" name="heure"/>
 
                                     </div>
 
@@ -109,8 +103,7 @@
                         <th>Type de Enseignement</th>
                         <th>Salle</th>
                         <th>Jour</th>
-                        <th>date Debut </th>
-                        <th>Date Fin</th>
+                        <th>Horaire</th>
                     </tr>
 
                     </thead>
@@ -121,8 +114,7 @@
                         <td th:text="${seance.repartition.enseignement.typeService}"></td>
                         <td th:text="${seance.salle}"></td>
                         <td th:text="${seance.jour}"></td>
-                        <td th:text="${seance.heuredeb}"></td>
-                        <td th:text="${seance.heurefin}"></td>
+                        <td th:text="${seance.heure}"></td>
                     </tr>
 
 
